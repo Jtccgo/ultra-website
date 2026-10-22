@@ -1,0 +1,14 @@
+:root{
+    --main-font: 'Inter', sans-Serif;
+    --primary-bg: #fffddb;
+    --dark-bg: #000ac2;
+    --primary-font-color: #7FFFD4;
+    --dark-font-color: #c66384;
+}
+#intro {
+    color: var(--dark-font-color);
+    font-family: var(--main-font);
+}
+body{
+    background-color: var(--primary-bg);
+}
