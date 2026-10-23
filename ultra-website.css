@@ -2,6 +2,7 @@
     margin:0;
     padding:0;
     box-sizing: border-box;
+    font-family: var(--main-font);
 }
 :root{
     --main-font: 'Inter', sans-Serif;
@@ -19,8 +20,12 @@ main{
     color: var(--dark-font-color);
     font-family: var(--main-font);
     padding: 40px 30px;
+    width:100vw;
+    height:1000px;
+    display: flex;
+    justify-content: center;
 }
-#logo {
+#heading-title {
     color: #ffffff;
     font-size: 24px;
     font-weight: bold;
@@ -36,9 +41,10 @@ main{
     position: sticky;
     top:0;
     z-index: 1000;
+    width: 100vw;
 }
 .nav-links a {
-    color: #aaaaaa;
+    color: #ffffff;
     text-decoration: none;
     font-size: 16 px;
     margin-left: 20px;
@@ -46,4 +52,15 @@ main{
 }
 .nav-links a:hover {
     color: #ffffff
+}
+.hidden {
+    display: none;
+}
+#center-content {
+    background-color:azure;
+    width:50vw;
+    padding: 10px;
+}
+.form-format label, .form-format button, .form-format input, .form-format p {
+    margin-top: 20px;
 }
