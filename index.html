@@ -16,85 +16,77 @@
     <header class = "navbar">
         <div id = "heading-title" >The Ultimate Website</div>
         <nav class = "nav-links"><!--each of the links will have an image attached to them to make the site more intuitive-->
-            <a href = "index.html">Home<img href = "" width = "x" height = "x"></a>
-            <a href = "converting.html">File Conversions<img href = "" width = "x" height = "x"></a>
-            <a href = "pixel-sandbox.html">Pixel Art Sandbox<img href = "" width = "x" height = "x"></a>
-            <a href = "aboutme.html">About the Author<img href = "author icon" width = "x" height = "x"></a>
+            <a href = "index.html">Home<img src = "sprites/Home Icon-20261026-120210-frame0.png"></a>
+            <a href = "converting.html">File Conversions<img src = "sprites/File Icon-20261026-120218-frame0.png"></a>
+            <a href = "pixel-sandbox.html">Pixel Art Sandbox<img src = "sprites/Sandbox-20261026-120200-frame0.png"></a>
+            <a href = "aboutme.html">About the Author<img src = "sprites/Author-20261026-115625-frame0.png"></a>
         </nav>
     </header>
+    
     <main>
+                <!--Left Widget-->
+        <div id = "left-widget" class = "draggable-widget">
+            <div class = "widget-header">To Do - Drag me!</div>
+            <div class = "widget-content">
+                <ul>
+                    <li>Digital measuring tool that accomadates the user's screen with active feedback</li>
+                    <li>Program the backend for file conversion and a pixel sandbox</li>
+                    <li>Create a timing system and other basic utilities someone might use everday</li>
+                </ul>
+            </div>
+        </div>
+
         <div id = "center-content"><!--This is where most of the content will be contained with occasoinal sidebars-->
-            <h3>Homepage (GO TO THE "ABOUT THE AUTHOR " PAGE DO SEE DRAGGABLE WIDGETS)</h3>
+            <h3>Homepage</h3>
                 This is the main page explaining about the author and the purpose of it including the utilities.
                 <br>| The main things that I want to do in this are going to be file conversion, making a pixel sandbox, making things you use everday like a measurmenet system, stopwatch, timer, and flash.
                 <br>
-                <h3>About the Author</h3><!--Actually should make this into a hidden page where you have to find a easter egg or something instead of the homepage-->
-                <p>Hello, my name is Jason. If I could really sum up my existense as a food it would be a Chili Cheese Dog with extra onions. 
-                    I believe you can tell a lot through a person by what foods they like, as culture and personal preferences/style can often manifset as comfort food or whether or not someone loves spicy and sour food over savory and sweet.
-                    My hobbies consist of programming, reading, playing video games, like assassians creed, minecraft, and fortnite, gardening, and making cool projects.
-                    In school I particpate in a variety of clubs: UIL(Only in texas) or the University Interscholastic League, Robotics(FTC), BPA or Buisness Professionals of America, Battle for the Books, and SkillsUSA.
-                    Conveinetly, a lot of my interests align with classes and clubs at my school, which makes me very happy and grateful. 
-                    Something important in my life are my two dogs, named Dusty and Buster.
-                    <img href = "dusty" height = >
-                    <img href = "buster" width = ><!--pictures of my dogs being so cute-->
-                    They make me very happy, and I play with them a lot, like a LOT.
-                    When I graduate from high school I <em>HOPE</em> to get into UT Austin for computer science, which is partly why I'm doing these sorts of projects now
-                    so that I build up a programming portfolio and strengthen my passion for computer science and in general engineering. 
-                    Specifically, UT Austin because they have an awsome super competitive Computer Science program, in fact 7th in the U.S.A., with a branch focused on Machine Learning, which would tie in really
-                    nicely into my potnetial career because I actually want to become a machine learning engineer.
-                    Also, its realistic because I have automatic admission due to being top 5% in my class, not to brag or anything but I am rank 4 <img href = "meme emjoi with cool glasses">
-                    I want to become a machine learning engineer because I love the qualities of engineeniring in general and computer science, and what better way to include both
-                    that training and building models that require both those things and are becoming increasingly lucrative.
-                    I guess if I leave any kind of trace online forever with this website its to make known that I owe everything that I have to the family
-                    and friends that have supported me,specifically and especially my mother, father, siblings, 5th grade teacher, and my best friend Maximus.
-                    <img href = "unseroious picture of emoji guy with thumbs us ">
+        </div>
+                        <!--Right Wdiget-->
+        <div id = "right-widget" class = "draggable-widget">
+            <div class = "widget-header">Aim - Drag me!</div>
+            <div class = "widget-content">
+                <p>What I want to do with this website is make it include utilities of all kind, eventually reaching the point to where whenever you need something
+                    you can just come to this website. This is in order to sustain a hopefully regular userbase.
                 </p>
+            </div>
         </div>
     </main>
         <!--This will be for the widget movment-->
     <script>
         makeElementDraggable(document.getElementById("left-widget"));
-        makeElementDraggable(document.getelementById("right-widget"));
+        makeElementDraggable(document.getElementById("right-widget"));
 
         function makeElementDraggable(element) {
-            let posX = 0, posY = 0, mouseX = 0; mouseY = 0;
-
-            const header = element.querySelector(".weidget-header");
-
-            if(header) {
-                header.onmousedown = dragMouseDown;
-            } else {
-                element.onmousedown = dragMouseDown;
+            if (!element) return;
+            const header = element.querySelector(".widget-header");
+            const dragHandle = header ? header : element;
+            let startX = 0, startY = 0;
+            let initialLeft = 0, initialTop = 0;
+            dragHandle.addEventListener('mousedown', dragMouseDown);
+            function dragMouseDown(e) {
+                e.preventDefault();
+                startX = e.clientX;
+                startY = e.clientY;
+                initialLeft = element.offsetLeft;
+                initialTop = element.offsetTop;
+                element.style.right = "auto";
+                element.style.left = initialLeft + "px";
+                element.style.top = initialTop + "px";
+                document.addEventListener('mousemove', elementDrag);
+                document.addEventListener('mouseup', closeDragElement);
             }
-        }
-        function dragMouseDown(e) {
-            e = e || window.event;
-            e.preventDefault();
-
-            mouseX = e.clientX;
-            mouseY = e.clientY;
-
-            document.onmouseup = closeDragElement;
-            document.onmousemove = elementDrag;
-        }
-
-        function elementDrag(e) { 
-            e = e || window.event;
-            e.preventDefault();
-
-            posX = mouseX-e.clientX;
-            posY = mouseY - e.clientY;
-            mouseX = e.clientX;
-            mouseY = e.clientY;
-
-            element.style.top = (element.offsetTop - posY) + "px";
-            element.style.left = (element.offsetLeft - posX) + "px";
-            element.style.right = "auto";
-        }
-        
-        function closeDragElement() {
-            document.onmouseup = null;
-            document.onmousemove = null;
-        }
+            function elementDrag(e) {
+                e.preventDefault();
+                const deltaX = e.clientX - startX;
+                const deltaY = e.clientY - startY;
+                element.style.left = (initialLeft + deltaX) + "px";
+                element.style.top = (initialTop + deltaY) + "px";
+            }
+            function closeDragElement() {
+                document.removeEventListener('mousemove', elementDrag);
+                document.removeEventListener('mouseup', closeDragElement);
+            }// after years of work it WORKSSSS yipeeeeee
+        }    
     </script> 
 </html>

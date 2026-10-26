@@ -44,6 +44,9 @@ main{
     z-index: 1000;
     width: 100vw;
 }
+.navbar img {/*No skibidi Idea why this doesn't work*/
+    margin-top: 400 px;
+}
 .nav-links a {
     color: #ffffff;
     text-decoration: none;
@@ -142,4 +145,8 @@ button[type = "submit"]:active {
 #right-widget {
     top:40px;
     right:40px;
+}
+#left-widget-aboutme {
+    top:300px;
+    left:40px;
 }

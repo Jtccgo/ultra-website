@@ -16,13 +16,21 @@
     <header class = "navbar">
         <div id = "heading-title" >The Ultimate Website</div>
         <nav class = "nav-links">
-            <a href = "index.html">Home<img href = "" width = "x" height = "x"></a>
-            <a href = "converting.html">File Conversions<img href = "" width = "x" height = "x"></a>
-            <a href = "pixel-sandbox.html">Pixel Art Sandbox<img href = "" width = "x" height = "x"></a>
-            <a href = "aboutme.html">About the Author<img href = "author icon" width = "x" height = "x"></a>
+            <a href = "index.html">Home<img src = "sprites/Home Icon-20261026-120210-frame0.png"></a>
+            <a href = "converting.html">File Conversions<img src = "sprites/File Icon-20261026-120218-frame0.png"></a>
+            <a href = "pixel-sandbox.html">Pixel Art Sandbox<img src = "sprites/Sandbox-20261026-120200-frame0.png"></a>
+            <a href = "aboutme.html">About the Author<img src = "sprites/Author-20261026-115625-frame0.png"></a>
         </nav>
     </header>
     <main>
+                <!--Left Widget-->
+        <div id = "left-widget" class = "draggable-widget">
+            <div class = "widget-header">TL;DR - Drag me!</div>
+            <div class = "widget-content">
+                <p>A client-based file converted with neat utilities.</p>
+            </div>
+        </div>
+
         <div id = "center-content">
             <h3>File Conversions</h3>
             <form class = "form-format">
@@ -61,5 +69,50 @@
                 Such as being able to rotate images a certain way, changing the resolution, or applying a tint.
             </p>
         </div>
+                        <!--Right Wdiget-->
+        <!--<div id = "right-widget" class = "draggable-widget">
+            <div class = "widget-header">Key Details - Drag me!</div>
+            <div class = "widget-content">
+                <p>Rank 4 in class</p>
+                <p>Dream School: UT Austin</p>
+                <p>Want to do machine learning</p>
+            </div>
+        </div>-->
     </main>
+        <script>
+makeElementDraggable(document.getElementById("left-widget"));
+    makeElementDraggable(document.getElementById("right-widget"));
+
+    function makeElementDraggable(element) {
+        if (!element) return;
+        const header = element.querySelector(".widget-header");
+        const dragHandle = header ? header : element;
+        let startX = 0, startY = 0;
+        let initialLeft = 0, initialTop = 0;
+        dragHandle.addEventListener('mousedown', dragMouseDown);
+        function dragMouseDown(e) {
+            e.preventDefault();
+            startX = e.clientX;
+            startY = e.clientY;
+            initialLeft = element.offsetLeft;
+            initialTop = element.offsetTop;
+            element.style.right = "auto";
+            element.style.left = initialLeft + "px";
+            element.style.top = initialTop + "px";
+            document.addEventListener('mousemove', elementDrag);
+            document.addEventListener('mouseup', closeDragElement);
+        }
+        function elementDrag(e) {
+            e.preventDefault();
+            const deltaX = e.clientX - startX;
+            const deltaY = e.clientY - startY;
+            element.style.left = (initialLeft + deltaX) + "px";
+            element.style.top = (initialTop + deltaY) + "px";
+        }
+        function closeDragElement() {
+            document.removeEventListener('mousemove', elementDrag);
+            document.removeEventListener('mouseup', closeDragElement);
+        }// after years of work it WORKSSSS yipeeeeee
+    }    
+    </script> 
 </html>
