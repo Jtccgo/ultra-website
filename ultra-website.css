@@ -6,7 +6,7 @@
 }
 :root{
     --main-font: 'Inter', sans-Serif;
-    --primary-bg: #fffddb;
+    --primary-bg: #d5d4b3;
     --dark-bg: #000ac2;
     --primary-font-color: #7FFFD4;
     --dark-font-color: #c66384;
@@ -54,13 +54,53 @@ main{
     color: #ffffff
 }
 .hidden {
-    display: none;
+    display: none !important;
 }
 #center-content {
     background-color:azure;
     width:50vw;
     padding: 10px;
+    border-radius:12px;
 }
 .form-format label, .form-format button, .form-format input, .form-format p {
     margin-top: 20px;
 }
+@keyframes fadeIn{
+    from {opacity: 0; transform: translateY(8px);}
+    to {opacity: 1; transform: translateY(0);}
+    to {opacity: 1; transform: translateY(0);}
+}
+select:focus {
+    border-color:var(--primary-font-color);
+    background-color:#fff;
+    box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.15); 
+}
+button[type = "submit"] {
+    width: 100%;
+    background-color: var(--primary-font-color);
+    color:white;
+    border: none;
+    padding: 14px;
+    font-size: 1rem;
+    font-weight:600;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+button[type = "submit"]:hover {
+    background-color:#4338ca;
+    transform: translateY(-1px);
+}
+button[type = "submit"]:active {
+    transform:translateY(0);
+}
+#success-message {
+    margin-top:20px;
+    padding: 12px 24 px;
+    background-color:#ecfdf5;
+    color:#065f46;
+    border: 1px solid #a7f3d0;
+    border-radius: 8px;
+    font-weight:600;    
+} 

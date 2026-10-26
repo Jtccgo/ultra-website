@@ -16,9 +16,10 @@
     <header class = "navbar">
         <div id = "heading-title" >The Ultimate Website</div>
         <nav class = "nav-links">
-            <a href = "index.html">Home</a>
-            <a href = "converting.html">File Conversions</a>
-            <a href = "pixel-sandbox.html">Pixel Art Sandbox</a>
+            <a href = "index.html">Home<img href = "" width = "x" height = "x"></a>
+            <a href = "converting.html">File Conversions<img href = "" width = "x" height = "x"></a>
+            <a href = "pixel-sandbox.html">Pixel Art Sandbox<img href = "" width = "x" height = "x"></a>
+            <a href = "aboutme.html">About the Author<img href = "author icon" width = "x" height = "x"></a>
         </nav>
     </header>
     <main>
@@ -32,7 +33,15 @@
                     <option value = "images" >Images</option>
                 </select><!-- then a dialog aappears with two dropdowns, with content depending on the value, inquiring the file types-->
                 <p>
-                    Convert 
+                    Convert
+                    <!--For each type they will have respective formats like
+                    images will have the png and all that goodo stuff
+                    but I'm not sure how to exactly get all of those 
+                    things I think I might need to create an array and implemenet
+                    it thorugh javascript perhaps or a datalist in html I think is possible
+                    more importanntly though I need to source everything I need 
+                    and then communicate that to the api 
+                    --> 
                     <select>
                        
                     </select>
@@ -47,6 +56,10 @@
                 <input type = "button" value = "Convert" id = "sumbit">
             </form>
             <a href= "green-omega-symbol.png download" = "converted-file" >DOWNLOAD</a>
+            <p class = "description">I got tired of using all the cheap filer converters online that required you to sell your soul for tokens so I created this:
+                a client-side based file converter using modern tools and apis. It also has some of the better cherry picked features I got from some of the best file converter sites.
+                Such as being able to rotate images a certain way, changing the resolution, or applying a tint.
+            </p>
         </div>
     </main>
 </html>
