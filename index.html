@@ -51,4 +51,50 @@
                 </p>
         </div>
     </main>
+        <!--This will be for the widget movment-->
+    <script>
+        makeElementDraggable(document.getElementById("left-widget"));
+        makeElementDraggable(document.getelementById("right-widget"));
+
+        function makeElementDraggable(element) {
+            let posX = 0, posY = 0, mouseX = 0; mouseY = 0;
+
+            const header = element.querySelector(".weidget-header");
+
+            if(header) {
+                header.onmousedown = dragMouseDown;
+            } else {
+                element.onmousedown = dragMouseDown;
+            }
+        }
+        function dragMouseDown(e) {
+            e = e || window.event;
+            e.preventDefault();
+
+            mouseX = e.clientX;
+            mouseY = e.clientY;
+
+            document.onmouseup = closeDragElement;
+            document.onmousemove = elementDrag;
+        }
+
+        function elementDrag(e) { 
+            e = e || window.event;
+            e.preventDefault();
+
+            posX = mouseX-e.clientX;
+            posY = mouseY - e.clientY;
+            mouseX = e.clientX;
+            mouseY = e.clientY;
+
+            element.style.top = (element.offsetTop - posY) + "px";
+            element.style.left = (element.offsetLeft - posX) + "px";
+            element.style.right = "auto";
+        }
+        
+        function closeDragElement() {
+            document.onmouseup = null;
+            document.onmousemove = null;
+        }
+    </script> 
 </html>

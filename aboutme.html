@@ -23,6 +23,15 @@
         </nav>
     </header>
     <main>
+        <!--Left Widget-->
+        <div id = "left-widget" class = "draggable-widget">
+            <div class = "widget-header"> My Dogs - Drag me!</div>
+            <div class = "widget-content">
+                <p>Dusty & Buster make me happy!</p>
+                <img src ="" alt ="" class = "">
+                <img src ="" alt ="" class = "">
+            </div>
+        </div>
         <div id = "center-content"><!--This is where most of the content will be contained with occasoinal sidebars-->
             <h3>Homepage</h3>
                 <br>
@@ -49,5 +58,52 @@
                     <img href = "unseroious picture of emoji guy with thumbs us ">
                 </p>
         </div>
+                <!--Right Wdiget-->
+        <div id = "right-widget" class = "draggable-widget">
+            <div class = "widget-header">Key Details - Drag me!</div>
+            <div class = "widget-content">
+                <p>Rank 4 in class</p>
+                <p>Dream School: UT Austin</p>
+                <p>Want to do machine learning</p>
+            </div>
+        </div>
+
     </main>
-</html>
+        <!--This will be for the widget movment-->
+    <script>
+makeElementDraggable(document.getElementById("left-widget"));
+    makeElementDraggable(document.getElementById("right-widget"));
+
+    function makeElementDraggable(element) {
+        if (!element) return;
+        const header = element.querySelector(".widget-header");
+        const dragHandle = header ? header : element;
+        let startX = 0, startY = 0;
+        let initialLeft = 0, initialTop = 0;
+        dragHandle.addEventListener('mousedown', dragMouseDown);
+        function dragMouseDown(e) {
+            e.preventDefault();
+            startX = e.clientX;
+            startY = e.clientY;
+            initialLeft = element.offsetLeft;
+            initialTop = element.offsetTop;
+            element.style.right = "auto";
+            element.style.left = initialLeft + "px";
+            element.style.top = initialTop + "px";
+            document.addEventListener('mousemove', elementDrag);
+            document.addEventListener('mouseup', closeDragElement);
+        }
+        function elementDrag(e) {
+            e.preventDefault();
+            const deltaX = e.clientX - startX;
+            const deltaY = e.clientY - startY;
+            element.style.left = (initialLeft + deltaX) + "px";
+            element.style.top = (initialTop + deltaY) + "px";
+        }
+        function closeDragElement() {
+            document.removeEventListener('mousemove', elementDrag);
+            document.removeEventListener('mouseup', closeDragElement);
+        }// after years of work it WORKSSSS yipeeeeee
+    }    
+    </script> 
+</html> 
