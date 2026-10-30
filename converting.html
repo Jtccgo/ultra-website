@@ -12,6 +12,7 @@
 
         <!-- Loads the Inter font weights (Regular 400 and Bold 700) -->
         <link href="https://googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+        <script src = "script.js" defer></script>
     </head>
     <header class = "navbar">
         <div id = "heading-title" >The Ultimate Website</div>
@@ -33,12 +34,13 @@
 
         <div id = "center-content">
             <h3>File Conversions</h3>
-            <form class = "form-format">
-                <select><!--have the user pick a value-->
+            <form id = "conversion-form"class = "form-format">
+                <select id = "file-type"><!--have the user pick a value-->
                     <option value = "none">-----</option>
                     <option value = "audio" >Audio</option>
                     <option value = "video" >Video</option>
                     <option value = "images" >Images</option>
+                    <option value = "documents">Documents</option>
                 </select><!-- then a dialog aappears with two dropdowns, with content depending on the value, inquiring the file types-->
                 <p>
                     Convert
@@ -50,20 +52,22 @@
                     more importanntly though I need to source everything I need 
                     and then communicate that to the api 
                     --> 
-                    <select>
-                       
+                    to
+                    <select id = "requested-format">
+                        <option value = "none">-----</option>
                     </select>
-                    to 
-                    <select>
-
-                    </select>
-                    .
-                </p>
+                    
+                </p>   
+                <label for = "quality-slider">Quality: 0.1</label>
+                <input type = "range" id = "quality-slider" min = "0.1" max = "1" value = "1" step = 0.05>
+                <label for = "quality-slider">1</label>
+                <span id = "slider-value">1</span>
+                <br>
                 <input id = "file-btn" type = "file" value = "Upload Files">
                 <br>
-                <input type = "button" value = "Convert" id = "sumbit">
+                <input type = "submit" value = "Convert" id = "sumbit">
+                <div id = "result-message"></div>
             </form>
-            <a href= "green-omega-symbol.png download" = "converted-file" >DOWNLOAD</a>
             <p class = "description">I got tired of using all the cheap filer converters online that required you to sell your soul for tokens so I created this:
                 a client-side based file converter using modern tools and apis. It also has some of the better cherry picked features I got from some of the best file converter sites.
                 Such as being able to rotate images a certain way, changing the resolution, or applying a tint.
@@ -80,7 +84,7 @@
         </div>-->
     </main>
         <script>
-makeElementDraggable(document.getElementById("left-widget"));
+    makeElementDraggable(document.getElementById("left-widget"));
     makeElementDraggable(document.getElementById("right-widget"));
 
     function makeElementDraggable(element) {
