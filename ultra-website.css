@@ -165,3 +165,6 @@ button[type = "submit"]:active {
     /*Need to find a new "description" and general background color for text in the center feed*/
 
 }
+#slider-container:has(.hidden) {
+    display:none;
+}

@@ -9,27 +9,38 @@ const sliderValue = document.getElementById('slider-value');
 const successMessage = document.getElementById('result-message');
 //to let the user know that their stuff has been submitted
 const imageFormats = [new Option("PNG", "png"), new Option("JPEG", "jpeg"),
-    new Option ("JPG", "jpg"), new Option("WEBP", "webp"), new Option("AVIF", "avif"), 
-    new Option("BMP", "bmp")
+    new Option ("JPG", "jpg"), new Option("WEBP", "webp"), /*new Option("AVIF", "avif"),*/ 
+    /*new Option("BMP", "bmp")*/
 ];
+//Avif and BMP are not currently supported
 const audioFormats = [new Option("MP3", "mp3"), new Option("AAC", "aac"),
     new Option("WAV", "wav"), new Option("AIFF", "aiff"), new Option("ALAC", "alac"),
     new Option("FLAC", "flac"), new Option("OGG", "ogg"), new Option("OPUS", "opus")
 ];
+
 const documentFormats = [new Option("DOCX", "docx"), new Option("ODT", "odt"),
     new Option("PDF", "pdf"), new Option("EPUB", "epub"), new Option("TXT", "txt"),
     new Option("MD", "md"), new Option("HTML", "html")
 ];
+
 const videoFormats = [new Option("MP4", "mp4"), new Option("MOV", "mov"),
     new Option("MKV", "mkv"), new Option("WebM", "webm"), new Option("AVI", "avi"),
     new Option("WMV", "wmv"), 
 ];
-form.addEventListener('submit', function(e) {
+
+form.addEventListener('submit', async function(e) {
     e.preventDefault();
     if(selectType.value === "none" || requestedFormat.value === "none" || fileUpload.files.length == 0) {
         alert("One or more of the inputs is null. Please try again.");
     } else {
-        ImageEngine.convert(fileUpload.files[0], {format: "jpg", quality: 0.5});
+        const engine = ConversionFactory.getEngine(selectType.value);
+        const numQuality = parseFloat(quality.value);
+        successMessage.textContent = "Processing file conversion, please wait...";
+        
+        await engine.convert(fileUpload.files[0], {
+            format: requestedFormat.value, 
+            quality: numQuality
+        });
     }
 });
 quality.oninput = function() {
@@ -41,18 +52,23 @@ selectType.addEventListener('change', function() {
 
         case "audio":
             audioFormats.forEach((imageType) => requestedFormat.add(imageType));
+            quality.classList.add('hidden');
             break;
         case "video":
             videoFormats.forEach((imageType) => requestedFormat.add(imageType));
+            quality.classList.add('hidden');
             break;
-        case "images":
+        case "image":
             imageFormats.forEach((imageType) => requestedFormat.add(imageType));
+            quality.classList.remove('hidden');
             break;
-        case "documents":
+        case "document":
             documentFormats.forEach((imageType) => requestedFormat.add(imageType));
+            quality.classList.add('hidden');
             break; 
         default: 
             requestedFormat.add(new Option("----", "none"));
+            quality.classList.add('hidden');
             break;     
     }
 });
@@ -77,7 +93,7 @@ const ImageEngine = {
 
                 const downloadLink = document.createElement('a');
                 downloadLink.href = dataURL;
-                downloadLink.download = `converted-file${options.format}`;
+                downloadLink.download = `converted-file.${options.format}`;
                 downloadLink.click();
             };
             img.src = event.target.result;
@@ -87,11 +103,95 @@ const ImageEngine = {
 }
 
 const VideoEngine = {
+    async convert(file, options) {
+        try {
+            await runFFmpegTranscode(file, options.format);
+        } catch(error) {
+            console.error("Video conversion failed:", error);
+            alert("Video transcoding failed");
+        }
+    }
+};
 
-}
+const AudioEngine = {
+    async convert(file, options) {
+        try {//runs the
+            await runFFmpegTranscode(file, options.format); 
+        } catch(error) {
+            console.error("Audio conversion failed:", error);
+            alert("Audio transcoding failed.");
+        }
+    }
+};
+
+const DocumentEngine = {
+    convert(file, options) {
+        console.log("Document engine starting...");
+        const reader = new FileReader();
+
+        reader.onload = function(event) {
+            //this applies to .pdf
+            const fileText = event.target.result;
+            if(options.format === 'pdf') {
+                const {jsPDF} = window.jspdf;
+                const doc = new jsPDF();
+
+                doc.text(fileText, 10, 10);
+
+                doc.save("converted-file.pdf");
+            } else {
+                //This applies to .txt .md .html
+                const blob = new Blob([fileText], {type: 'text/plain'});
+                const dataURL = URL.createObjectURL(blob);
+
+                const downloadLink = document.createElement('a');
+                downloadLink.href = dataURL;
+                downloadLink.download = `converted-document.${options.format}`;
+                downloadLink.click();
+                URL.revokeObjectURL(dataURL);
+            }
+        };
+        reader.readAsText(file);
+    }
+};
+
+const ConversionFactory = {
+    getEngine(fileType) {
+        switch(fileType) {//Automatically gives the right engine so you don't have to worry about doing the logic yourself
+            case 'image': return ImageEngine;
+            case 'video': return VideoEngine;
+            case 'audio': return AudioEngine;
+            case 'document': return DocumentEngine;
+            default: throw new Error("Unsupported File Type");
+        }
+    }
+};
 
 
+//Helper function 
+async function runFFmpegTranscode(file, targetFormat) {
+    console.log(`Initializing FFmpeg.wasm for ${targetFormat} conversion`);
+    //I don't know whats wrong exactly but it seems like its not download the libraries and packages this program needs
+    const {FFmpeg} = window.FFmpeg;//this kind of syntax is used to destructure functions and classes
+    const {fetchFile, toBlobURL} = window.FFmpegUtil;
+    const ffmpeg = new FFmpeg();//creates a class of ffmpeg a popular free tool to convert and manipulate audio and video files
+    const baseURL = 'https://unpkg.com/@ffmpeg/core@0.12.6/dist/umd';
+    
+    await ffmpeg.load({
+        coreURL: await toBlobURL(`${baseURL}/ffmpeg-core.js`, 'text/javascript'),
+        wasmURL: await toBlobURL(`${baseURL}/ffmpeg-core.wasm`, 'application/wasm'), //<--- look at this comma its crazy its called a trailing comma and its used so it doesn't look like there is two new changes in git when adding another line of parameter
+    });//waits for the thread/worker to initalize and load the .wasm or webAssembly
+    await ffmpeg.writeFile('input_file', await fetchFile(file));//writes the file to the stream
+    await ffmpeg.exec(['-i', 'input_file', `output.${targetFormat}`]);//first two parameters declare the input and the third is the result
+    const data = await ffmpeg.readFile(`output.${targetFormat}`);//reads the binary data of the output file so that we can make a download link
+    const dataURL = URL.createObjectURL(new Blob([data.buffer], {type: `${selectType.value}/${targetFormat}`}));//makes a temporary web link from the blob that the user downloads
 
+    const downloadLlink = document.createElement('a');
+    downloadLink.href = dataURL;
+    downloadLink.download = `converted-file.${targetFormat}`;
+    downloadLink.click();
+    //downloads the file for the user using a link element
+};
 
 
 

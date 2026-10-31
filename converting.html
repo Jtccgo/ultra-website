@@ -12,7 +12,9 @@
 
         <!-- Loads the Inter font weights (Regular 400 and Bold 700) -->
         <link href="https://googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
-        <script src = "script.js" defer></script>
+        <script src="https://cdn.jsdelivr.net/npm/@ffmpeg/ffmpeg@0.12.15/dist/umd/ffmpeg.js"></script><!--Downloads the needed items to run the script file-->
+        <script src="https://cdn.jsdelivr.net/npm/@ffmpeg/util@0.12.1/dist/umd/index.js"></script>        
+        <script src = "script.js" defer></script><!--Defer means to load this page before the script file-->
     </head>
     <header class = "navbar">
         <div id = "heading-title" >The Ultimate Website</div>
@@ -39,8 +41,8 @@
                     <option value = "none">-----</option>
                     <option value = "audio" >Audio</option>
                     <option value = "video" >Video</option>
-                    <option value = "images" >Images</option>
-                    <option value = "documents">Documents</option>
+                    <option value = "image" >Images</option>
+                    <option value = "document">Documents</option>
                 </select><!-- then a dialog aappears with two dropdowns, with content depending on the value, inquiring the file types-->
                 <p>
                     Convert
@@ -58,11 +60,13 @@
                     </select>
                     
                 </p>   
-                <label for = "quality-slider">Quality: 0.1</label>
-                <input type = "range" id = "quality-slider" min = "0.1" max = "1" value = "1" step = 0.05>
-                <label for = "quality-slider">1</label>
-                <span id = "slider-value">1</span>
-                <br>
+                <div id = "slider-container">
+                    <label for = "quality-slider">Quality: 0.1</label>
+                    <input class = "hidden" type = "range" id = "quality-slider" min = "0.1" max = "1" value = "1" step = 0.05>
+                    <label for = "quality-slider">1</label>
+                    <span id = "slider-value">1</span>
+                    <br>
+                </div>
                 <input id = "file-btn" type = "file" value = "Upload Files">
                 <br>
                 <input type = "submit" value = "Convert" id = "sumbit">
@@ -74,49 +78,47 @@
             </p>
         </div>
                         <!--Right Wdiget-->
-        <!--<div id = "right-widget" class = "draggable-widget">
-            <div class = "widget-header">Key Details - Drag me!</div>
+        <div id = "right-widget" class = "draggable-widget">
+            <div class = "widget-header">Features Coming Soon - Drag me!</div>
             <div class = "widget-content">
-                <p>Rank 4 in class</p>
-                <p>Dream School: UT Austin</p>
-                <p>Want to do machine learning</p>
+                <p>Support for BMP and AVIF files</p>
             </div>
-        </div>-->
+        </div>
     </main>
         <script>
-    makeElementDraggable(document.getElementById("left-widget"));
-    makeElementDraggable(document.getElementById("right-widget"));
+            makeElementDraggable(document.getElementById("left-widget"));
+            makeElementDraggable(document.getElementById("right-widget"));
 
-    function makeElementDraggable(element) {
-        if (!element) return;
-        const header = element.querySelector(".widget-header");
-        const dragHandle = header ? header : element;
-        let startX = 0, startY = 0;
-        let initialLeft = 0, initialTop = 0;
-        dragHandle.addEventListener('mousedown', dragMouseDown);
-        function dragMouseDown(e) {
-            e.preventDefault();
-            startX = e.clientX;
-            startY = e.clientY;
-            initialLeft = element.offsetLeft;
-            initialTop = element.offsetTop;
-            element.style.right = "auto";
-            element.style.left = initialLeft + "px";
-            element.style.top = initialTop + "px";
-            document.addEventListener('mousemove', elementDrag);
-            document.addEventListener('mouseup', closeDragElement);
-        }
-        function elementDrag(e) {
-            e.preventDefault();
-            const deltaX = e.clientX - startX;
-            const deltaY = e.clientY - startY;
-            element.style.left = (initialLeft + deltaX) + "px";
-            element.style.top = (initialTop + deltaY) + "px";
-        }
-        function closeDragElement() {
-            document.removeEventListener('mousemove', elementDrag);
-            document.removeEventListener('mouseup', closeDragElement);
-        }// after years of work it WORKSSSS yipeeeeee
-    }    
+            function makeElementDraggable(element) {
+                if (!element) return;
+                const header = element.querySelector(".widget-header");
+                const dragHandle = header ? header : element;
+                let startX = 0, startY = 0;
+                let initialLeft = 0, initialTop = 0;
+                dragHandle.addEventListener('mousedown', dragMouseDown);
+                function dragMouseDown(e) {
+                    e.preventDefault();
+                    startX = e.clientX;
+                    startY = e.clientY;
+                    initialLeft = element.offsetLeft;
+                    initialTop = element.offsetTop;
+                    element.style.right = "auto";
+                    element.style.left = initialLeft + "px";
+                    element.style.top = initialTop + "px";
+                    document.addEventListener('mousemove', elementDrag);
+                    document.addEventListener('mouseup', closeDragElement);
+                }
+                function elementDrag(e) {
+                    e.preventDefault();
+                    const deltaX = e.clientX - startX;
+                    const deltaY = e.clientY - startY;
+                    element.style.left = (initialLeft + deltaX) + "px";
+                    element.style.top = (initialTop + deltaY) + "px";
+                }
+                function closeDragElement() {
+                    document.removeEventListener('mousemove', elementDrag);
+                    document.removeEventListener('mouseup', closeDragElement);
+                }// after years of work it WORKSSSS yipeeeeee
+            }    
     </script> 
 </html>
