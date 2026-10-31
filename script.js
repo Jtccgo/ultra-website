@@ -172,11 +172,14 @@ const ConversionFactory = {
 async function runFFmpegTranscode(file, targetFormat) {
     console.log(`Initializing FFmpeg.wasm for ${targetFormat} conversion`);
     //I don't know whats wrong exactly but it seems like its not download the libraries and packages this program needs
-    const {FFmpeg} = window.FFmpeg;//this kind of syntax is used to destructure functions and classes
+    const {FFmpeg} = window.FFmpegWASM;//this kind of syntax is used to destructure functions and classes
     const {fetchFile, toBlobURL} = window.FFmpegUtil;
     const ffmpeg = new FFmpeg();//creates a class of ffmpeg a popular free tool to convert and manipulate audio and video files
     const baseURL = 'https://unpkg.com/@ffmpeg/core@0.12.6/dist/umd';
-    
+    //WHAT ERROR IS HAPPENING HERE
+    // if(!ffmpeg.isLoaded()) {
+    //     await ffmpeg.load();
+    // }
     await ffmpeg.load({
         coreURL: await toBlobURL(`${baseURL}/ffmpeg-core.js`, 'text/javascript'),
         wasmURL: await toBlobURL(`${baseURL}/ffmpeg-core.wasm`, 'application/wasm'), //<--- look at this comma its crazy its called a trailing comma and its used so it doesn't look like there is two new changes in git when adding another line of parameter
