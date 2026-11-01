@@ -68,8 +68,10 @@ main{
     display: flex;
     flex-direction: column;
     align-items: center;
+    overflow-y:auto;
+    scroll-behavior:smooth;
+    min-height:100vh;
 }
-
 /*For the pixel sandbox exclusively*/
 #sandbox-toolbar {
     display: flex;
@@ -245,8 +247,8 @@ button[type = "submit"]:active {
     display: revert;
 }
 .game-container {
-    font-size: clamp(1rem, 2.5vw, 2rem);/*minimum is 1rem target is 2.5% of screen width 2rem is maximum*/
-    width: 100%;
+    font-size: 10px;
+    width: 30%;
     aspect-ratio: 1/1;
     background-color:#333;
     border-radius: 12px;
@@ -258,7 +260,7 @@ button[type = "submit"]:active {
 .game-container:hover{
     transform: scale(1.05);
 }
-#game-grid {
+#game-grid {/*Might want to change a lot of this CSS code to have a display of grid rather than flex because retrospectively that makes a lot more sense*/
     background-color:azure;
     width:50vw;
     padding: 25px;
@@ -267,10 +269,60 @@ button[type = "submit"]:active {
     flex-direction: column;
     align-items: center;
     gap:16px;
-    grid-template-columns: repeate(auto-fill, minmax(140px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
 }
 .game-container img{
+    position: relative;
     width:100%;
     height:100%;
     object-fit:cover;
+}
+.game-title-overlay{
+    opacity: 0;
+    transition: opacity 0.2s ease;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    display:flex;
+    justify-content: center;
+    align-items:flex-end;
+
+    padding: 24px 12px 10px 12px;
+    box-sizing: border-box;
+    background:linear-gradient(to top, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0) 100%);
+}
+.game-title-overlay span {
+    opacity: 1;
+    color: #ffffff;
+    font-family: 'Arial', sans-serif;
+    font-size: 0.8vw;
+    font-weight: 700;
+    text-shadow: 0 1px 3px rgba(0,0,0,0.5);
+    text-align: center;
+
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
+    width:100%;
+}
+.game-container:hover .game-title-overlay{
+    opacity: 1;
+}
+.active-game-viewport {
+    width:100%;
+    max-width:1031px;
+    aspect-ratio: 16/9;
+    margin: 20px auto;
+    background-color:#000000;
+    border-radius:8px;
+    overflow:hidden;
+    box-shadow:0 8px 24px rgba(0, 0, 0, 0.3);
+}
+.active-game-viewport canvas,
+.active-game-viewport iframe {
+    width:100%;
+    height:100%;
+    border:none;
+    display:block;
 }
