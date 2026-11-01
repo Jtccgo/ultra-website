@@ -44,8 +44,8 @@ main{
     z-index: 1000;
     width: 100vw;
 }
-#navbar img {/*No skibidi Idea why this doesn't work*/
-    margin-top: 400 px;
+#navbar img {
+    margin-top: 0;
 }
 .nav-links a {
     color: #ffffff;
@@ -63,12 +63,78 @@ main{
 #center-content {
     background-color:azure;
     width:50vw;
-    padding: 10px;
+    padding: 25px;
     border-radius:12px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
+
+/*For the pixel sandbox exclusively*/
+#sandbox-toolbar {
+    display: flex;
+    flex-wrap: wrap;/*Wraps around*/
+    gap:12px;/*So the UI isn't clumped together though I think I might just add cells not sure*/
+    align-items:center;
+    justify-content:center;
+    margin: 20px 0;/*20 px top and bottom 0 left and right*/
+    background: #ffffff;
+    padding:12px 20px;
+    border-radius:8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+.tool-btn {
+    padding:8px 16px;
+    border: 1px solid #ccc;/*thickness type and color*/
+    border-radius: 6px;
+    background: #f9f9f9;
+    cursor: pointer;
+    font-weight:600;
+}
+.tool-btn.active {/*Applies to elements that have both classes*/
+    background: var(--dark-bg);
+    color: #ffffff;
+    border-color: var(--dark-bg);
+}
+#color-picker {
+    border: none;
+    width: 35px;
+    height:35px;
+    cursor: pointer;
+    background:none;
+}
+#clear-btn {
+    background: #ef4444;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight:600;
+}
+#canvas-container {
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10px;
+}
+#pixel-canvas {
+    width: 480px !important;
+    height: 480px !important;
+    aspect-ratio: 1/1;
+    border: 2px solid #333;
+    background-color: #ffffff;
+    /*so it doesnt have a weird blur*/
+    image-rendering: pixelated;
+    image-rendering: crisp-edges;
+    cursor: url('sprites/pencil.png') 64 64, crosshair;
+}                                    
 .form-format label, .form-format button, .form-format input, .form-format p {
     margin-top: 20px;
 }
+
+
+
 @keyframes fadeIn{
     from {opacity: 0; transform: translateY(8px);}
     to {opacity: 1; transform: translateY(0);}
@@ -110,7 +176,8 @@ button[type = "submit"]:active {
 } 
 .draggable-widget {
     position: absolute;
-    width: 220px;
+    width: 15%;/*Makes it so that the widgets on mobile and small desktop screens don't look really cramped and overlapping*/
+    max-width: 600px;
     background-color: #ffffff;
     border: 2px solid var(--dark-bg);
     border-radius: 12px;

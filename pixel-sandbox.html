@@ -10,7 +10,7 @@
         <link rel="preconnect" href="https://googleapis.com">
         <link rel="preconnect" href="https://gstatic.com" crossorigin>
         <script src = "global.js" defer></script><!--"defer" might be redunant because of the event listener in the script-->
-
+        <script src = "sandbox.js" defer></script>
         <!-- Loads the Inter font weights (Regular 400 and Bold 700) -->
         <link href="https://googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
     </head>
@@ -25,8 +25,26 @@
             </div>
         </div>
         <div id = "center-content">
-            <p id = "intro">This is a pixel sandbox</p>
-            <p class = "description">I have trouble finding a good artistry tool for simple icons made out of pixel so I created this: an intutitive, <em>CLEARLY and OBVIOUSLY</em> labeled pixel sandbox and editor. It will also have cool features, like turning a photo into pixel art.</p>
+            <h3 id = "intro">Pixel Sandbox</h3>
+                <!--This container is probably where I want to put the sandbox -->
+                            
+                <div id = "sandbox-toolbar"><!--Obviously the toolbar-->
+                    <button type = "button" class = "tool-btn active" data-tool = "draw"><img src = "sprites/pencil.png"></button><!--Normally would be a small sprite of the pencil tool but this is just a placeholder-->
+                    <button type = "button" class = "tool-btn" data-tool= 'erase'><img src = "sprites/eraser.png"></button><!--Again I have a sprite for this-->
+                    <label for = "color-picker">Color:</label>
+                    <input type = "color" id = "color-picker" value ="#000000">
+                    <button type = "button" id = "clear-btn"><img src = "sprites/Button-20261026-115529-frame0.png"></button>
+                </div>
+                <!--This is the actual canvas and drawing space-->
+                <div id = "canvas-container">
+                    <canvas id = "pixel-canvas" width = "32" height = "32"></canvas>
+                </div>
+                <button type = "button" id = "download-btn">Download</button>
+                <label for = "resolution">Resolution: </label>
+                <input type = "text" id = "resolution" value = "32"></input>
+            <p class = "description">I have trouble finding a good artistry tool for simple icons made out of pixel so I created this: an intutitive, 
+                <em>CLEARLY and OBVIOUSLY</em> labeled pixel sandbox and editor. It will also have cool features, like turning a photo into pixel art.</p>
+                
         </div> 
                         <!--Right Wdiget--><!--
         <div id = "right-widget" class = "draggable-widget">
