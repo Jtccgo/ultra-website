@@ -244,3 +244,33 @@ button[type = "submit"]:active {
 #progress-container:not(:has(.hidden)) {
     display: revert;
 }
+.game-container {
+    font-size: clamp(1rem, 2.5vw, 2rem);/*minimum is 1rem target is 2.5% of screen width 2rem is maximum*/
+    width: 100%;
+    aspect-ratio: 1/1;
+    background-color:#333;
+    border-radius: 12px;
+    overflow:hidden;
+    position:relative;
+    transition:transform 0.2s ease;/*makes the transition to hovering lookp pretty cool*/
+    cursor:pointer;
+}
+.game-container:hover{
+    transform: scale(1.05);
+}
+#game-grid {
+    background-color:azure;
+    width:50vw;
+    padding: 25px;
+    border-radius:12px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap:16px;
+    grid-template-columns: repeate(auto-fill, minmax(140px, 1fr));
+}
+.game-container img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+}

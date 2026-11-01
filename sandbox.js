@@ -1,3 +1,4 @@
+// TODO: Implement Bresenham's Algorithm
 const downloadBtn = document.getElementById('download-btn');
 const canvas = document.getElementById("pixel-canvas");
 const ctx = canvas.getContext('2d');
@@ -11,14 +12,14 @@ const submit = document.getElementById('submit');
 const xThickness = document.getElementById('xThickness');
 const yThickness = document.getElementById('yThickness');
 let GRID_SIZE = parseInt(resolution.value) || 32;/*Nice bold constant used to represent the canvas "pixels" as a square should be modifiable to change the resolution*/
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded", () => { 
 
     let currentTool = "draw";
     let isDrawing = false; 
     ctx.fillStyle = '#ffffff';
     ctx.fillRect(0,0,GRID_SIZE, GRID_SIZE);
 
-    toolBtns.forEach(btn => {//adds this event listener to all elements that have this class
+    toolBtns.forEach(btn => {//adds this event listener to all elements that have this class 
         btn.addEventListener("click", () => {
             toolBtns.forEach(b => b.classList.remove("active"));
             btn.classList.add("active");
@@ -35,7 +36,7 @@ document.addEventListener("DOMContentLoaded", () => {
         return {x, y};
     }
 
-    function draw(e) {//on big resolutions the mouse draws too slow
+    function draw(e) {//on big resolutions the mouse draws too slow 
         if(!isDrawing) return;
         const {x, y} = getCoords(e);
 

@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html> 
+    <head>
+        <meta charset = "UTF-8">
+        <meta name = "viewport" content = "width = device-width, inital-scale = 1.0">
+        <title>The Ultimate Website</title>
+        <link rel = "stylesheet" href = "ultra-website.css">
+        <link rel = "icon" type = "image/png" href = "green-omega-symbol.png">
+                <!-- Connects to Google Fonts -->
+        <link rel="preconnect" href="https://googleapis.com">
+        <link rel="preconnect" href="https://gstatic.com" crossorigin>
+        <script src = "global.js" defer></script><!--"defer" might be redunant because of the event listener in the script-->
+        <!-- Loads the Inter font weights (Regular 400 and Bold 700) -->
+        <link href="https://googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+    </head>
+    <header id = "navbar">
+    </header>
+    
+    <main>
+                <!--Left Widget-->
+        <!-- <div id = "left-widget" class = "draggable-widget">
+            <div class = "widget-header">To Do - Drag me!</div>
+            <div class = "widget-content">
+                <ul>
+                    <li>Digital measuring tool that accomadates the user's screen with active feedback</li>
+                    <li>Program the backend for file conversion and a pixel sandbox</li>
+                    <li>Create a timing system and other basic utilities someone might use everday</li>
+                </ul>
+            </div>
+        </div> -->
+
+        <div id = "game-grid"><!--This is where most of the content will be contained with occasoinal sidebars--> why the hell is it so big bruh
+            <h3>Gamehub</h3>
+            <div class = "description"></div>
+            <a>
+                <div class = "game-container">
+                    <img src = "images/precision-stack.png" >
+                    <p>Precision Stack</p>
+                </div>
+            </a>
+        </div>
+                        <!--Right Wdiget-->
+        <!-- <div id = "right-widget" class = "draggable-widget">
+            <div class = "widget-header">Aim - Drag me!</div>
+            <div class = "widget-content">
+                <p>What I want to do with this website is make it include utilities of all kind, eventually reaching the point to where whenever you need something
+                    you can just come to this website. This is in order to sustain a hopefully regular userbase.
+                </p>
+            </div>
+        </div> -->
+    </main>
+        <!--This will be for the widget movment-->
+    <!-- <script>
+        makeElementDraggable(document.getElementById("left-widget"));
+        makeElementDraggable(document.getElementById("right-widget"));
+
+        function makeElementDraggable(element) {
+            if (!element) return;
+            const header = element.querySelector(".widget-header");
+            const dragHandle = header ? header : element;
+            let startX = 0, startY = 0;
+            let initialLeft = 0, initialTop = 0;
+            dragHandle.addEventListener('mousedown', dragMouseDown);
+            function dragMouseDown(e) {
+                e.preventDefault();
+                startX = e.clientX;
+                startY = e.clientY;
+                initialLeft = element.offsetLeft;
+                initialTop = element.offsetTop;
+                element.style.right = "auto";
+                element.style.left = initialLeft + "px";
+                element.style.top = initialTop + "px";
+                document.addEventListener('mousemove', elementDrag);
+                document.addEventListener('mouseup', closeDragElement);
+            }
+            function elementDrag(e) {
+                e.preventDefault();
+                const deltaX = e.clientX - startX;
+                const deltaY = e.clientY - startY;
+                element.style.left = (initialLeft + deltaX) + "px";
+                element.style.top = (initialTop + deltaY) + "px";
+            }
+            function closeDragElement() {
+                document.removeEventListener('mousemove', elementDrag);
+                document.removeEventListener('mouseup', closeDragElement);
+            }// after years of work it WORKSSSS yipeeeeee
+        }    
+    </script>  -->
+</html>
