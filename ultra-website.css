@@ -119,8 +119,8 @@ main{
     margin-top: 10px;
 }
 #pixel-canvas {
-    width: 480px !important;
-    height: 480px !important;
+    width: 480px;
+    height: 480px;
     aspect-ratio: 1/1;
     border: 2px solid #333;
     background-color: #ffffff;

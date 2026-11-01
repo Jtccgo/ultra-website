@@ -33,16 +33,28 @@
                     <button type = "button" class = "tool-btn" data-tool= 'erase'><img src = "sprites/eraser.png"></button><!--Again I have a sprite for this-->
                     <label for = "color-picker">Color:</label>
                     <input type = "color" id = "color-picker" value ="#000000">
+                    <label for = "clear-btn">Clear:</label>
                     <button type = "button" id = "clear-btn"><img src = "sprites/Button-20261026-115529-frame0.png"></button>
                 </div>
+
                 <!--This is the actual canvas and drawing space-->
                 <div id = "canvas-container">
                     <canvas id = "pixel-canvas" width = "32" height = "32"></canvas>
                 </div>
+                <label for = "xThickness" >Stroke Thickness: </label>
+                <input type = "text" id = 'xThickness' value = "1">X</input>
+                <input type = "text" id = 'yThickness' value = "1">Y</input>
                 <button type = "button" id = "download-btn">Download</button>
                 <label for = "resolution">Resolution: </label>
                 <input type = "text" id = "resolution" value = "32"></input>
-            <p class = "description">I have trouble finding a good artistry tool for simple icons made out of pixel so I created this: an intutitive, 
+                <!--asks the user for an image to uplaod to pixel if they want to-->
+
+                <input type = "file" id = "uploadedImage" value = "Upload Image"></input>
+                <label for = "keepResolution">Keep image resolution?</label>
+                <input id = "keepResolution" type = "checkbox" class class = "hidden"></input>
+                <input type = "button" value = "Replace Pixel Sandbox?" id = "submit"></input>
+
+            <p class = "description">I have trouble finding a good artistry tool for simple icons made out of pixels so I created this: an intutitive, 
                 <em>CLEARLY and OBVIOUSLY</em> labeled pixel sandbox and editor. It will also have cool features, like turning a photo into pixel art.</p>
                 
         </div> 
