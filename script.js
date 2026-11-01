@@ -151,24 +151,24 @@ const DocumentEngine = {
             const fileText = event.target.result;
             if(options.format === 'pdf') {
                 const {jsPDF} = window.jspdf;
-                const doc = new jsPDF();
-
+                const doc = new jsPDF();//destructures the stuff from cloudfare
+                    
                 doc.text(fileText, 10, 10);
 
-                doc.save("converted-file.pdf");
+                doc.save("converted-file.pdf");//saves it 
             } else {
                 //This applies to .txt .md .html
                 const blob = new Blob([fileText], {type: 'text/plain'});
-                const dataURL = URL.createObjectURL(blob);
+                const dataURL = URL.createObjectURL(blob);//creates a tempoary URL
 
                 const downloadLink = document.createElement('a');
                 downloadLink.href = dataURL;
                 downloadLink.download = `converted-document.${options.format}`;
                 downloadLink.click();
-                URL.revokeObjectURL(dataURL);
+                URL.revokeObjectURL(dataURL);//deletes after downloading :D
             }
         };
-        reader.readAsText(file);
+        reader.readAsText(file);//reads after loading so we can use it
     }
 };
 

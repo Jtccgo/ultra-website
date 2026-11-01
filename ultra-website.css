@@ -32,7 +32,7 @@ main{
     font-weight: bold;
     cursor: pointer;
 }
-.navbar {
+#navbar {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -44,7 +44,7 @@ main{
     z-index: 1000;
     width: 100vw;
 }
-.navbar img {/*No skibidi Idea why this doesn't work*/
+#navbar img {/*No skibidi Idea why this doesn't work*/
     margin-top: 400 px;
 }
 .nav-links a {
