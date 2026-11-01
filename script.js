@@ -7,6 +7,8 @@ const sumbit = document.getElementById('sumbit');
 const quality = document.getElementById('quality-slider');
 const sliderValue = document.getElementById('slider-value');
 const successMessage = document.getElementById('result-message');
+const progressBar = document.getElementById('conversion-progress');
+const progressBarTxt = document.getElementById("conversion-progress-txt");
 //to let the user know that their stuff has been submitted
 const imageFormats = [new Option("PNG", "png"), new Option("JPEG", "jpeg"),
     new Option ("JPG", "jpg"), new Option("WEBP", "webp"), /*new Option("AVIF", "avif"),*/ 
@@ -35,12 +37,24 @@ form.addEventListener('submit', async function(e) {
     } else {
         const engine = ConversionFactory.getEngine(selectType.value);
         const numQuality = parseFloat(quality.value);
-        successMessage.textContent = "Processing file conversion, please wait...";
-        
-        await engine.convert(fileUpload.files[0], {
-            format: requestedFormat.value, 
-            quality: numQuality
-        });
+        //does a little animation for looping the dots to let the user know that their file is because actively transcribed and translated 
+        let dotCount = 0;
+        const loadingInterval = setInterval(() => {
+            dotCount = (dotCount + 1) % 4;
+            const dots = ".".repeat(dotCount);
+            successMessage.textContent = `Processing file conversion, please wait${dots}`;
+        }, 500);//Updates every half second
+        try {
+            await engine.convert(fileUpload.files[0], {
+                format: requestedFormat.value, 
+                quality: numQuality
+            });
+            clearInterval(loadingInterval);
+            successMessage.textContent = "Conversion successful! :D";
+        } catch(error) {
+            clearInterval(loadingInterval);
+            successMessage.textContent = "Conversion failed. Please try again.";
+        }
     }
 });
 quality.oninput = function() {
@@ -61,14 +75,17 @@ selectType.addEventListener('change', function() {
         case "image":
             imageFormats.forEach((imageType) => requestedFormat.add(imageType));
             quality.classList.remove('hidden');
+            progressBar.classList.add('hidden');
             break;
         case "document":
             documentFormats.forEach((imageType) => requestedFormat.add(imageType));
             quality.classList.add('hidden');
+            progressBar.classList.add('hidden');
             break; 
         default: 
             requestedFormat.add(new Option("----", "none"));
             quality.classList.add('hidden');
+            progressBar.classList.add('hidden');
             break;     
     }
 });
@@ -172,32 +189,38 @@ const ConversionFactory = {
 async function runFFmpegTranscode(file, targetFormat) {
     console.log(`Initializing FFmpeg.wasm for ${targetFormat} conversion`);
     //I don't know whats wrong exactly but it seems like its not download the libraries and packages this program needs
-    const {FFmpeg} = window.FFmpegWASM;//this kind of syntax is used to destructure functions and classes
-    const {fetchFile, toBlobURL} = window.FFmpegUtil;
-    const ffmpeg = new FFmpeg();//creates a class of ffmpeg a popular free tool to convert and manipulate audio and video files
-    const baseURL = 'https://unpkg.com/@ffmpeg/core@0.12.6/dist/umd';
-    //WHAT ERROR IS HAPPENING HERE
-    // if(!ffmpeg.isLoaded()) {
-    //     await ffmpeg.load();
-    // }
-    await ffmpeg.load({
-        coreURL: await toBlobURL(`${baseURL}/ffmpeg-core.js`, 'text/javascript'),
-        wasmURL: await toBlobURL(`${baseURL}/ffmpeg-core.wasm`, 'application/wasm'), //<--- look at this comma its crazy its called a trailing comma and its used so it doesn't look like there is two new changes in git when adding another line of parameter
-    });//waits for the thread/worker to initalize and load the .wasm or webAssembly
-    await ffmpeg.writeFile('input_file', await fetchFile(file));//writes the file to the stream
-    await ffmpeg.exec(['-i', 'input_file', `output.${targetFormat}`]);//first two parameters declare the input and the third is the result
-    const data = await ffmpeg.readFile(`output.${targetFormat}`);//reads the binary data of the output file so that we can make a download link
-    const dataURL = URL.createObjectURL(new Blob([data.buffer], {type: `${selectType.value}/${targetFormat}`}));//makes a temporary web link from the blob that the user downloads
+    const {createFFmpeg, fetchFile} = FFmpeg;
+    const ffmpeg = createFFmpeg({log:true});
+    progressBar.classList.remove('hidden');
+    progressBar.value = 0;
+    ffmpeg.setProgress(({ratio}) => {
+        const percent = Math.max(0, Math.min(100, Math.round(ratio * 100)));
+        progressBar.value = percent;
+        progressBarTxt.textContent = `${percent}%`;
+    });
+    if(!ffmpeg.isLoaded()) {
+        await ffmpeg.load();
+    }
+    //writes the file in a different format based on the arguments
+    ffmpeg.FS('writeFile', 'input_file', await fetchFile(file));
+    await ffmpeg.run('-i', 'input_file', '-preset', 'ultrafast', `output.${targetFormat}`);//presetted to ultra fast because it takes way too long. at least for my hunk of junk of a computer 
+    //reads the results and puts them into a temporary URL for the user
+    const data = ffmpeg.FS('readFile', `output.${targetFormat}`);
+    const dataURL = URL.createObjectURL(new Blob([data.buffer], {type : `${selectType.value}/${targetFormat}`}));
 
-    const downloadLlink = document.createElement('a');
+    const downloadLink = document.createElement('a');
     downloadLink.href = dataURL;
     downloadLink.download = `converted-file.${targetFormat}`;
     downloadLink.click();
-    //downloads the file for the user using a link element
+    //automatically downloads downloads the file for the user using a link element
 };
 
 
-
+//TODO: 
+/*
+-Need to optimize the converting according to docs 
+-
+*/
 /*
 have to add an event listner so that when the user
 to press submit they get an rejection message 

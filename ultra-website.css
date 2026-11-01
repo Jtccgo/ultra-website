@@ -156,7 +156,7 @@ button[type = "submit"]:active {
     padding: 5px;
     margin-top: 20px;
 }
-#slider-value {
+#slider-value, #conversion-progress-txt {
     display:inline-flex;
     background-color: lightblue;
     justify-content: center;
@@ -167,4 +167,13 @@ button[type = "submit"]:active {
 }
 #slider-container:has(.hidden) {
     display:none;
+}
+#conversion-progress {
+    width: 100%;
+}
+#progress-container:has(.hidden) {
+    display:none;
+}
+#progress-container:not(:has(.hidden)) {
+    display: revert;
 }
