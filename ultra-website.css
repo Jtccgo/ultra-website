@@ -326,3 +326,50 @@ button[type = "submit"]:active {
     border:none;
     display:block;
 }
+.time-display {
+    font-size:3rem;/*3 times root attribute*/
+    font-weight: 700;
+    background:#111;
+    color:var(--primary-font-color);/*This provides a really nice contrast of color*/
+    padding: 20px 40px;
+    border-radius: 12px;
+    letter-spacing: 2px;
+    margin:20px 0;
+    text-align: center;
+}
+.button-group {
+    display:flex;
+    gap:10px;
+    margin-top: 15px;
+}
+.action-btn {
+    padding: 10px 20px;
+    background-color: var(--dark-bg);
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-weight: 600;
+    cursor: pointer;
+}
+.action-btn.danger {
+    background-color: #ef4444;
+}
+.timer-inputs {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 10x;
+}
+.timer-inputs input {
+    width: 70px;
+    padding: 8px;
+    font-size: 1rem;
+    text-align: center;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+}
+.time-panel {
+    display: flex;
+    flex-direction: column;/*Organizes into columns instead of rows might need to change this as well as the gamehub instance of use*/
+    align-items: center;
+    width:100%;
+}

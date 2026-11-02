@@ -20,6 +20,7 @@ document.addEventListener("DOMContentLoaded", () => {
             <a href = "../pixel-sandbox.html">Pixel Art Sandbox<img src = "../sprites/Sandbox-20261026-120200-frame0.png"></a>
             <a href = "../gamehub.html">Gamehub<img src = "../sprites/controller.png"></a>
             <a href = "../aboutme.html">About the Author<img src = "../sprites/Author-20261026-115625-frame0.png"></a>
+            <a href = "../basicUtil.html">Basic Utilities</a>
         </nav> 
         `;
         } else {
@@ -32,6 +33,7 @@ document.addEventListener("DOMContentLoaded", () => {
             <a href = "pixel-sandbox.html">Pixel Art Sandbox<img src = "sprites/Sandbox-20261026-120200-frame0.png"></a>
             <a href = "gamehub.html">Gamehub<img src = "sprites/controller.png"></a>
             <a href = "aboutme.html">About the Author<img src = "sprites/Author-20261026-115625-frame0.png"></a>
+            <a href = "basicUtil.html">Basic Utilities</a>
         </nav>
         `;
         }

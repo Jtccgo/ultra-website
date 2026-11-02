@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html> 
+    <head>
+        <meta charset = "UTF-8">
+        <meta name = "viewport" content = "width = device-width, initial-scale = 1.0">
+        <title>The Ultimate Website</title>
+        <link rel = "stylesheet" href = "ultra-website.css">
+        <link rel = "icon" type = "image/png" href = "green-omega-symbol.png">
+                <!-- Connects to Google Fonts -->
+        <link rel="preconnect" href="https://googleapis.com">
+        <link rel="preconnect" href="https://gstatic.com" crossorigin>
+        <script src = "global.js" defer></script><!--"defer" might be redunant because of the event listener in the script-->
+        <!-- Loads the Inter font weights (Regular 400 and Bold 700) -->
+        <link href="https://googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+    </head>
+    <header id = "navbar">
+    </header>
+    
+    <main>
+                <!--Left Widget-->
+        <div id = "left-widget" class = "draggable-widget">
+            <div class = "widget-header"><img src = "sprites/dragger.png" width = "20px" height = "20px">TL;DR - Drag me!</div>
+            <div class = "widget-content">
+                <p>This is a page containing multiple everday use utilities</p>
+            </div>
+        </div> 
+
+        <div id = "center-content"><!--This is where most of the content will be contained with occasoinal sidebars-->
+            <h3>Basic Utilities</h3>
+            <div class = "description">
+            </div>
+
+            <div id = "sandbox-toolbar">
+                <button type = "button" class = "tool-btn active" data-tab="clock">Live Clock</button>
+                <button type = "button" class ="tool-btn" data-tab = "stopwatch">Stopwatch</button>
+                <button type = "button" class = "tool-btn" data-tab = "timer">Countdown Timer</button>
+            </div>
+            <!--The first tab: the clock-->
+            <div id = "clock-section" class = "time-panel">
+                <div class = "time-display" id = "clock-display">00:00:00 AM</div>
+            </div>
+
+            <!--Secod tab: stopwatch I should probably add the time on the top left somwhere under the nav thing that would look pretty cool-->
+            <div id = "stopwatch-section" class = "time-panel">
+                <div class = "time-display" id = "stopwatch-display">00:00:00</div>
+                <div class = "button-group">
+                    <button type = "button" class = "action-btn" id = "sw-start-btn">Start</button>
+                    <button type = "button" class = "action-btn" id = "sw-pause-btn">Pause</button>
+                    <button type = "button" class = "action-btn danger" id= "sw-reset-btn">Reset</button>
+                </div>
+            </div>
+            <!--3rd tab: Countdown Timer-->
+            <div id ="timer-section" class = "time-panel hidden">
+                <div class = "time-display" id = "timer-display">00:00</div>
+                <div class = "timer-inputs">
+                    <input type = "number" id = "timer-minutes" placeholder = "Mins" min = "0" max = "99" value = "5">
+                    <input type = "number" id = "timer-seconds" placeholder = "Secs" min = "0" max = "59" value = "0">
+                </div>
+                <div class = "button-group">
+                    <button type = "button" class = "action-btn" id = "t-start-btn">Start</button>
+                    <button type = "button" class = "action-btn" id ="t-pause-btn">Pause</button>
+                    <button type = "button" class = "action-btn danger" id = "t-reset-btn">Reset</button>
+                </div>
+            </div>
+            <p class = "description"> A page of client-side timpkeeping tools and other utilities made for daily productivity.</p>
+        </div>
+                        <!--Right Wdiget-->
+        <!-- <div id = "right-widget" class = "draggable-widget">
+            <div class = "widget-header">Aim - Drag me!</div>
+            <div class = "widget-content">
+                <p>What I want to do with this website is make it include utilities of all kind, eventually reaching the point to where whenever you need something
+                    you can just come to this website. This is in order to sustain a hopefully regular userbase.
+                </p>
+            </div>
+        </div> -->
+    </main>
+        <!--This will be for the widget movment--> 
+    <script>
+        makeElementDraggable(document.getElementById("left-widget"));
+        makeElementDraggable(document.getElementById("right-widget"));
+
+        function makeElementDraggable(element) {
+            if (!element) return;
+            const header = element.querySelector(".widget-header");
+            const dragHandle = header ? header : element;
+            let startX = 0, startY = 0;
+            let initialLeft = 0, initialTop = 0;
+            dragHandle.addEventListener('mousedown', dragMouseDown);
+            function dragMouseDown(e) {
+                e.preventDefault();
+                startX = e.clientX;
+                startY = e.clientY;
+                initialLeft = element.offsetLeft;
+                initialTop = element.offsetTop;
+                element.style.right = "auto";
+                element.style.left = initialLeft + "px";
+                element.style.top = initialTop + "px";
+                document.addEventListener('mousemove', elementDrag);
+                document.addEventListener('mouseup', closeDragElement);
+            }
+            function elementDrag(e) {
+                e.preventDefault();
+                const deltaX = e.clientX - startX;
+                const deltaY = e.clientY - startY;
+                element.style.left = (initialLeft + deltaX) + "px";
+                element.style.top = (initialTop + deltaY) + "px";
+            }
+            function closeDragElement() {
+                document.removeEventListener('mousemove', elementDrag);
+                document.removeEventListener('mouseup', closeDragElement);
+            }// after years of work it WORKSSSS yipeeeeee
+        }    
+    </script> 
+</html>
