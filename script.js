@@ -20,7 +20,7 @@ const audioFormats = [new Option("MP3", "mp3"), new Option("AAC", "aac"),
     new Option("FLAC", "flac"), new Option("OGG", "ogg"), new Option("OPUS", "opus")
 ];
 
-const documentFormats = [new Option("DOCX", "docx"), new Option("ODT", "odt"),
+const documentFormats = [/*new Option("DOCX", "docx"), new Option("ODT", "odt"),*/
     new Option("PDF", "pdf"), new Option("EPUB", "epub"), new Option("TXT", "txt"),
     new Option("MD", "md"), new Option("HTML", "html")
 ];
