@@ -3,6 +3,12 @@
 
 Welcome to **The Ultimate Website**, a client-side web application designed to provide integral everyday digital utilities without relying on external cloud servers or paid subscriptions. Built with modern web tools, it runs purely in your browser, ensuring speed, privacy, and offline capability.
 
+<img width="815" height="665" alt="image" src="https://github.com/user-attachments/assets/3a7a91f2-62f8-41e5-8a1b-3e20c98fb8f2" />
+<img width="1584" height="761" alt="image" src="https://github.com/user-attachments/assets/aab5adcf-f475-4405-b2dc-51bef6762829" />
+<img width="1583" height="763" alt="image" src="https://github.com/user-attachments/assets/51e4b27e-db99-43a4-be24-93c29d4eba16" />
+<img width="1596" height="898" alt="27d97191-f1db-444a-936d-1260deebd0dc" src="https://github.com/user-attachments/assets/431b170e-c937-4e53-819d-43dc4a6d2340" />
+<img width="1599" height="899" alt="817f8641-7b80-4733-a38e-fad045c6f6e9" src="https://github.com/user-attachments/assets/eedae833-5acd-446a-beb1-e4144173d9a3" />
+
 ---
 
 ## Features
@@ -25,6 +31,15 @@ Welcome to **The Ultimate Website**, a client-side web application designed to p
 * Displays useful info relating to the current web page.
 * Can be utilized as sidebars with additional features.
 
+### 🎮 Gamehub
+* Features a responsive user UI
+* Hosts games client-side
+* Convenient options like fullscreen
+
+### ⌛ General Utilities
+* Everyday utilities so far including a stopwatch, timer, and local time
+* I plan to add a digital measurement tool soon
+* User-friendly layout 
 ---
 
 ## Technology Stack
