@@ -8,6 +8,8 @@ Welcome to **The Ultimate Website**, a client-side web application designed to p
 <img width="1583" height="763" alt="image" src="https://github.com/user-attachments/assets/51e4b27e-db99-43a4-be24-93c29d4eba16" />
 <img width="1596" height="898" alt="27d97191-f1db-444a-936d-1260deebd0dc" src="https://github.com/user-attachments/assets/431b170e-c937-4e53-819d-43dc4a6d2340" />
 <img width="1599" height="899" alt="817f8641-7b80-4733-a38e-fad045c6f6e9" src="https://github.com/user-attachments/assets/eedae833-5acd-446a-beb1-e4144173d9a3" />
+<img width="1599" height="899" alt="image" src="https://github.com/user-attachments/assets/cc75b424-8d52-48c1-ae8d-dd7feddf30dd" />
+<img width="540" height="262" alt="The Ultimate Website; Nov 2, 9 40 PM" src="https://github.com/user-attachments/assets/7b968bb6-e1ec-4bbe-a57b-eb9bddafd83f" />
 
 ---
 
