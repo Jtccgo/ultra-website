@@ -21,7 +21,7 @@ main{
     font-family: var(--main-font);
     padding: 40px 30px;
     width:100vw;
-    height:1000px;
+    height:100vw;
     display: flex;
     justify-content: center;
     position: relative;
@@ -32,27 +32,29 @@ main{
     font-weight: bold;
     cursor: pointer;
 }
-#navbar {
+#navbar { 
     display: flex;
     justify-content: space-between;
     align-items: center;
     background-color: rgb(110, 154, 67);
-    padding: 15px 30px;
-
+    padding: 10px 20px;
     position: sticky;
     top:0;
     z-index: 1000;
     width: 100vw;
 }
 #navbar img {
-    margin-top: 0;
+    
 }
 .nav-links a {
+    display: inline-flex;
+    align-items: center;
     color: #ffffff;
     text-decoration: none;
-    font-size: 16 px;
+    font-size: 16px;
     margin-left: 20px;
     transition: color 0.3s ease;
+    gap: 6px;
 }
 .nav-links a:hover {
     color: #ffffff
@@ -248,7 +250,8 @@ button[type = "submit"]:active {
 }
 .game-container {
     font-size: 10px;
-    width: 30%;
+    width: 10vw;
+    height:10vw;
     aspect-ratio: 1/1;
     background-color:#333;
     border-radius: 12px;
@@ -262,13 +265,14 @@ button[type = "submit"]:active {
 }
 #game-grid {/*Might want to change a lot of this CSS code to have a display of grid rather than flex because retrospectively that makes a lot more sense*/
     background-color:azure;
-    width:50vw;
+    width:70vw;/*might need to change it back to 50vw not sure*/
     padding: 25px;
     border-radius:12px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    display: grid;
+    justify-items: center;
     gap:16px;
+    align-content: start;
+    min-height: auto;/*very useful for relative sizing of the game container to its cell*/
     grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
 }
 .game-container img{
@@ -372,4 +376,9 @@ button[type = "submit"]:active {
     flex-direction: column;/*Organizes into columns instead of rows might need to change this as well as the gamehub instance of use*/
     align-items: center;
     width:100%;
+}
+#title {
+    grid-column: 1/-1;/*Stretches from the first to last column*/
+    width:100%;
+    text-align: center;
 }
