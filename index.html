@@ -9,6 +9,7 @@
                 <!-- Connects to Google Fonts -->
         <link rel="preconnect" href="https://googleapis.com">
         <link rel="preconnect" href="https://gstatic.com" crossorigin>
+        <script src = "https://cdnjs.cloudflare.com/ajax/libs/matter-js/0.19.0/matter.min.js" defer></script><!--The library I will use to simulate what I want my mascot to do--> 
         <script src = "global.js" defer></script><!--"defer" might be redunant because of the event listener in the script-->
         <!-- Loads the Inter font weights (Regular 400 and Bold 700) -->
         <link href="https://googleapis.com/css2?family=Inter:weight@400;700&display=swap" rel="stylesheet">
@@ -45,6 +46,7 @@
                 </p>
             </div>
         </div>
+        <div id = "physics-container" style = "width: 100vw; height: 100vh; overflow:hidden; background: #111"></div>
     </main>
         <!--This will be for the widget movment-->
     <script>

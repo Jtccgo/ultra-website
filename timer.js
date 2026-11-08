@@ -113,4 +113,60 @@ document.addEventListener("DOMContentLoaded", () => {
     });//sets temporary display to freeze and stops the interval
 
     updateTimerDisplay();
+    //METRONOME TERRITORY 
+    const bpmDisplay = document.getElementById("metronome-bpm-display");
+    const bpmSlider = document.getElementById("bpm-slider");
+    const bpmNumber = document.getElementById("bpm-number");
+    const metroStart = document.getElementById("metro-start-btn");
+    const metroStop = document.getElementById("metro-stop-btn")
+    let bpm = 120;
+    let metroInterval = null;
+    let audioContext = null;
+    //Eventually I want to include custom sounds and stuff 
+    function playClick() {//uses the webAudio API
+        if(!audioContext) {
+            audioContext = new (window.AudioContext || window.webkitAudioContext)();//good practice because it covers modern and older browsers
+        } if (audioContext.state === "suspended") {audioContext.resume();}//make sure that it's going 
+        const osc = audioContext.createOscillator();//
+        const gain = audioContext.createGain();
+
+        osc.type = 'sine';//Oscillator is literally just like trigonmetric functions 
+        osc.frequency.setValueAtTime(1000, audioContext.currentTime);//frequency Hz higher = more sharper
+
+        gain.gain.setValueAtTime(1, audioContext.currentTime);//gain is like the amplitude so this is basically volume
+        gain.gain.exponentialRampToValueAtTime(0.001, audioContext.currentTime + 0.05);//relatively short
+
+        osc.connect(gain);//this stuff brings it all together into what I want
+        gain.connect(audioContext.destination);
+        osc.start();
+        osc.stop(audioContext.currentTime + 0.05);
+    }
+
+    function updateBpm(newBpm) {
+        bpm = Math.min(Math.max(newBpm, 40), 240);//Its limited liked this because its what humans naturally relate and connect to; anything above or below the limit is too fast that it sounds continuous or too slow that the beats don't even seem successive
+        bpmDisplay.textContent = `${bpm} BPM`;
+        bpmSlider.value = bpm;
+        bpmNumber.value = bpm;
+        if(metroInterval) {
+            stopMetronome();
+            startMetronome();
+        }
+    }
+
+    function startMetronome() {
+        if(metroInterval) return;
+        //playClick(); dont want this because when scrolling the slider it makes a lot of noise 
+        const intervalMs = (60/bpm) * 1000;
+        metroInterval = setInterval(playClick, intervalMs);
+    }
+    function stopMetronome() {
+        clearInterval(metroInterval);
+        metroInterval = null;
+    }
+
+    bpmSlider.addEventListener("input", (e) =>  updateBpm(parseInt(e.target.value)));//so elegant (*ˊᗜˋ*)
+    bpmNumber.addEventListener("change", (e) => updateBpm(parseInt(e.target.value) || 120));
+
+    metroStart.addEventListener("click", startMetronome);
+    metroStop.addEventListener("click", stopMetronome);
 }); 

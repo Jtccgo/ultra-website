@@ -24,7 +24,6 @@
                 <p>This is a page containing multiple everday use utilities</p>
             </div>
         </div> 
-
         <div id = "center-content"><!--This is where most of the content will be contained with occasoinal sidebars-->
             <h3>Basic Utilities</h3>
             <div class = "description">
@@ -34,6 +33,7 @@
                 <button type = "button" class = "tool-btn active" data-tab="clock">Live Clock</button>
                 <button type = "button" class ="tool-btn" data-tab = "stopwatch">Stopwatch</button>
                 <button type = "button" class = "tool-btn" data-tab = "timer">Countdown Timer</button>
+                <button type = "button" class = "tool-btn" data-tab = "metronome">Metronome</button>
             </div>
             <!--The first tab: the clock-->
             <div id = "clock-section" class = "time-panel">
@@ -60,6 +60,18 @@
                     <button type = "button" class = "action-btn" id = "t-start-btn">Start</button>
                     <button type = "button" class = "action-btn" id ="t-pause-btn">Pause</button>
                     <button type = "button" class = "action-btn danger" id = "t-reset-btn">Reset</button>
+                </div>
+            </div>
+            <!--Fourth tab is ths metronome-->
+            <div id = "metronome-section" class = "time-panel hidden">
+                <div class = "time-display" id = "metronome-bpm-display">120 BPM</div>
+                <div class = "timer-inputs" style = "align-items: center; gap: 15px"><!--Add some additional formatting with more *specificty* Might want to move it to actual css though-->
+                    <input type = "range" id = "bpm-slider" min = "40" max = "240" value = "120" style = "width: 200px; cursor: pointer;">
+                    <input type = "number" id = "bpm-number" min = "40" max = "240" value = "120" style = "width: 80px;">
+                </div>
+                <div class = "button-group">
+                    <button type = "button" class = "action-btn" id = "metro-start-btn">Start</button>
+                    <button type = "button" class = "action-btn danger" id = "metro-stop-btn">Stop</button>
                 </div>
             </div>
             <p class = "description"> A page of client-side timpkeeping tools and other utilities made for daily productivity.</p>
