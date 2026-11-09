@@ -1,5 +1,14 @@
 /*! coi-serviceworker v0.1.7 - Guido Zuidhof and contributors, licensed under MIT */
 let coepCredentialless = false;
+self.addEventListener('fetch', function (event ) {
+    const r = event.request;
+    if(r.url.match(/\.(png|jpg|jpeg|webp|gif|svg)$/i)) {
+        return; 
+    }
+    if(r.cache === "only-if-cached" && r.mode !== "same-origin") {
+        return;
+    }
+});
 if (typeof window === 'undefined') {
     self.addEventListener("install", () => self.skipWaiting());
     self.addEventListener("activate", (event) => event.waitUntil(self.clients.claim()));
