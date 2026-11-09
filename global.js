@@ -38,5 +38,27 @@ document.addEventListener("DOMContentLoaded", () => {
         `;
         }
     }
+    //GAMEHUB TERRITORY
+    const fullscreenBtn = document.getElementById('fullscreen-btn');
+    const gameViewport = document.querySelector('.active-game-viewport');
+
+    if(fullscreenBtn && gameViewport) {
+        fullscreenBtn.addEventListener('click', () => {
+            if(!document.fullscreenElement) {//sets up the interactions
+                gameViewport.requestFullscreen().catch((err) => {
+                    console.error(`Could not access fullscreen mod: ${err}`);
+                });
+                fullscreenBtn.textContent = "⛶ Exit Fullscreen";//might want to change the special symbol to the oppsoite instead of it being the same if possible
+            } else {
+                document.existFullscreen();
+                fullscreenBtn.textContent = "⛶ Fullscreeen"
+            }
+        });
+        document.addEventListener('fullscreenchange', () => {//this is for if the user press esc
+            if(!document.fullscreenElement) {
+                fullscreenBtn.textContent = "⛶ Fullscreeen"
+            }
+        });
+    }
 });
 

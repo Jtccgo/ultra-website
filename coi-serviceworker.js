@@ -3,10 +3,10 @@ let coepCredentialless = false;
 self.addEventListener('fetch', function (event ) {
     const r = event.request;
     if(r.url.match(/\.(png|jpg|jpeg|webp|gif|svg)$/i)) {
-        return; 
+        return; //tells it that if any of the intercepted stuff is this type of format ignore it 
     }
     if(r.cache === "only-if-cached" && r.mode !== "same-origin") {
-        return;
+        return;//this stuff repeats so you can delete it if you want to I think 
     }
 });
 if (typeof window === 'undefined') {
