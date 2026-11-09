@@ -382,3 +382,17 @@ button[type = "submit"]:active {
     width:100%;
     text-align: center;
 }
+#physics-container {
+    position: absolute; 
+    top:0;
+    left:0;
+    z-index: 2000; 
+    width: 100%; 
+    overflow:hidden; 
+    background: transparent;
+    pointer-events:none;/*so that way the site behind can still be interacted with by the user*/
+}
+#physics-container canvas {
+    pointer-events: auto;
+    display: block;
+}
