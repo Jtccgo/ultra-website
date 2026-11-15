@@ -49,7 +49,7 @@ window.addEventListener('load', () => {
         frictionAir: 0.01,//object sliiiiiiide
         render: {
             sprite : {
-                texture: "sprites/black-box.avif",//temporarily use a red circle
+                texture: "../sprites/black-box.avif",//temporarily use a red circle
                 xScale: 0.1, //scale texture to actualy body
                 yScale:0.1
             }

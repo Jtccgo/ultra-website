@@ -1,4 +1,4 @@
-/*
+ /*
 The primary purpose of this script is to set/add elements to webpages that are basically universal to my website layout
 with some exceptions, so that I don't have to constantly change stuff like the navigation bar.
 */
@@ -23,7 +23,20 @@ document.addEventListener("DOMContentLoaded", () => {
             <a href = "../html/basicUtil.html">Basic Utilities</a>
         </nav> 
         `;
-        } else {
+        } else if(currentPath.includes("index")){
+        navBar.innerHTML =
+        `  
+        <div id = "heading-title" >The Ultimate Website</div>
+        <nav class = "nav-links"><!--each of the links will have an image attached to them to make the site more intuitive-->
+            <a href = "index.html">Home<img src = "sprites/Home Icon-20261026-120210-frame0.png"></a>
+            <a href = "html/converting.html">File Conversions<img src = "sprites/File Icon-20261026-120218-frame0.png"></a>
+            <a href = "html/pixel-sandbox.html">Pixel Art Sandbox<img src = "sprites/Sandbox-20261026-120200-frame0.png"></a>
+            <a href = "html/gamehub.html">Gamehub<img src = "sprites/controller.png"></a>
+            <a href = "html/aboutme.html">About the Author<img src = "sprites/Author-20261026-115625-frame0.png"></a>
+            <a href = "html/basicUtil.html">Basic Utilities</a>
+        </nav>
+        `;
+        }else {
         navBar.innerHTML =
         `  
         <div id = "heading-title" >The Ultimate Website</div>
@@ -60,5 +73,4 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         });
     }
-});
-
+}); 
