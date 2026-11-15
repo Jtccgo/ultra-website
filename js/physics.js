@@ -49,7 +49,7 @@ window.addEventListener('load', () => {
         frictionAir: 0.01,//object sliiiiiiide
         render: {
             sprite : {
-                texture: "../sprites/black-box.avif",//There might be some error with this but im nto sure
+                texture: (window.location.pathname === "/" || window.location.pathname.includes("index")) ? "sprites/black-box.avif" : "../sprites/black-box.avif",
                 xScale: 0.1, //scale texture to actualy body
                 yScale:0.1
             }

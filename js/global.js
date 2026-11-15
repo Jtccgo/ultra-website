@@ -10,46 +10,46 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if(navBar) {//checks to see if navBar actually exists 
         const currentPath = window.location.pathname;
+        console.log(currentPath);
         if(currentPath.includes('/gamehub-sites/')) {
-        navBar.innerHTML =
-        `  
-        <div id = "heading-title" >The Ultimate Website</div>
-        <nav class = "nav-links"><!--each of the links will have an image attached to them to make the site more intuitive-->
-            <a href = "../index.html">Home<img src = "../sprites/Home Icon-20261026-120210-frame0.png"></a>
-            <a href = "../html/converting.html">File Conversions<img src = "../sprites/File Icon-20261026-120218-frame0.png"></a>
-            <a href = "../html/pixel-sandbox.html">Pixel Art Sandbox<img src = "../sprites/Sandbox-20261026-120200-frame0.png"></a>
-            <a href = "../html/gamehub.html">Gamehub<img src = "../sprites/controller.png"></a>
-            <a href = "../html/aboutme.html">About the Author<img src = "../sprites/Author-20261026-115625-frame0.png"></a>
-            <a href = "../html/basicUtil.html">Basic Utilities</a>
-        </nav> 
-        `;
-        } else if(currentPath.includes("index")){
-        console.log("SKIBIDI");
-        navBar.innerHTML =
-        `  
-        <div id = "heading-title" >The Ultimate Website</div>
-        <nav class = "nav-links"><!--each of the links will have an image attached to them to make the site more intuitive-->
-            <a href = "index.html">Home<img src = "sprites/Home Icon-20261026-120210-frame0.png"></a>
-            <a href = "html/converting.html">File Conversions<img src = "sprites/File Icon-20261026-120218-frame0.png"></a>
-            <a href = "html/pixel-sandbox.html">Pixel Art Sandbox<img src = "sprites/Sandbox-20261026-120200-frame0.png"></a>
-            <a href = "html/gamehub.html">Gamehub<img src = "sprites/controller.png"></a>
-            <a href = "html/aboutme.html">About the Author<img src = "sprites/Author-20261026-115625-frame0.png"></a>
-            <a href = "html/basicUtil.html">Basic Utilities</a>
-        </nav>
-        `;
+            navBar.innerHTML =
+            `  
+            <div id = "heading-title" >The Ultimate Website</div>
+            <nav class = "nav-links"><!--each of the links will have an image attached to them to make the site more intuitive-->
+                <a href = "../index.html">Home<img src = "../sprites/Home Icon-20261026-120210-frame0.png"></a>
+                <a href = "../html/converting.html">File Conversions<img src = "../sprites/File Icon-20261026-120218-frame0.png"></a>
+                <a href = "../html/pixel-sandbox.html">Pixel Art Sandbox<img src = "../sprites/Sandbox-20261026-120200-frame0.png"></a>
+                <a href = "../html/gamehub.html">Gamehub<img src = "../sprites/controller.png"></a>
+                <a href = "../html/aboutme.html">About the Author<img src = "../sprites/Author-20261026-115625-frame0.png"></a>
+                <a href = "../html/basicUtil.html">Basic Utilities</a>
+            </nav> 
+            `;
+        } else if(currentPath.includes("index") || currentPath === "/"){
+        
+        navBar.innerHTML =`  
+            <div id = "heading-title" >The Ultimate Website</div>
+            <nav class = "nav-links"><!--each of the links will have an image attached to them to make the site more intuitive-->
+                <a href = "index.html">Home<img src = "sprites/Home Icon-20261026-120210-frame0.png"></a>
+                <a href = "html/converting.html">File Conversions<img src = "sprites/File Icon-20261026-120218-frame0.png"></a>
+                <a href = "html/pixel-sandbox.html">Pixel Art Sandbox<img src = "sprites/Sandbox-20261026-120200-frame0.png"></a>
+                <a href = "html/gamehub.html">Gamehub<img src = "sprites/controller.png"></a>
+                <a href = "html/aboutme.html">About the Author<img src = "sprites/Author-20261026-115625-frame0.png"></a>
+                <a href = "html/basicUtil.html">Basic Utilities</a>
+            </nav>
+            `;
         }else {
         navBar.innerHTML =
-        `  
-        <div id = "heading-title" >The Ultimate Website</div>
-        <nav class = "nav-links"><!--each of the links will have an image attached to them to make the site more intuitive-->
-            <a href = "../index.html">Home<img src = "../sprites/Home Icon-20261026-120210-frame0.png"></a>
-            <a href = "../html/converting.html">File Conversions<img src = "../sprites/File Icon-20261026-120218-frame0.png"></a>
-            <a href = "../html/pixel-sandbox.html">Pixel Art Sandbox<img src = "../sprites/Sandbox-20261026-120200-frame0.png"></a>
-            <a href = "../html/gamehub.html">Gamehub<img src = "../sprites/controller.png"></a>
-            <a href = "../html/aboutme.html">About the Author<img src = "../sprites/Author-20261026-115625-frame0.png"></a>
-            <a href = "../html/basicUtil.html">Basic Utilities</a>
-        </nav>
-        `;
+            `  
+            <div id = "heading-title" >The Ultimate Website</div>
+            <nav class = "nav-links"><!--each of the links will have an image attached to them to make the site more intuitive-->
+                <a href = "../index.html">Home<img src = "../sprites/Home Icon-20261026-120210-frame0.png"></a>
+                <a href = "../html/converting.html">File Conversions<img src = "../sprites/File Icon-20261026-120218-frame0.png"></a>
+                <a href = "../html/pixel-sandbox.html">Pixel Art Sandbox<img src = "../sprites/Sandbox-20261026-120200-frame0.png"></a>
+                <a href = "../html/gamehub.html">Gamehub<img src = "../sprites/controller.png"></a>
+                <a href = "../html/aboutme.html">About the Author<img src = "../sprites/Author-20261026-115625-frame0.png"></a>
+                <a href = "../html/basicUtil.html">Basic Utilities</a>
+            </nav>
+            `;
         }
     }
     //GAMEHUB TERRITORY
