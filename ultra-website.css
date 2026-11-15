@@ -16,7 +16,7 @@
     font-family: var(--main-font);
 }
 main{
-    background-color: var(--primary-bg);
+    /*background-color: var(--primary-bg);*/
     color: var(--dark-font-color);
     font-family: var(--main-font);
     padding: 40px 30px;
@@ -395,4 +395,15 @@ button[type = "submit"]:active {
 #physics-container canvas {
     pointer-events: auto;
     display: block;
+}
+#shader-background {
+    position: fixed;
+    top:0;
+    left: 0;/*Positions at origin*/
+    width: 100vw;
+    height: 100vh;
+    z-index: -1;
+}
+body::-webkit-scrollbar {/*Removes the scrollbar*/
+    display: none;
 }

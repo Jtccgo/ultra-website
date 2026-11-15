@@ -12,44 +12,49 @@
         <link rel="preconnect" href="https://googleapis.com">
         <link rel="preconnect" href="https://gstatic.com" crossorigin>
         <script src = "https://cdnjs.cloudflare.com/ajax/libs/matter-js/0.19.0/matter.min.js" defer></script><!--The library I will use to simulate what I want my mascot to do--> 
-        <script src = "physics.js" defer></script>
-        <script src = "global.js" defer></script><!--"defer" might be redunant because of the event listener in the script-->
-        <!-- Loads the Inter font weights (Regular 400 and Bold 700) -->
+        <script src = "js/physics.js" defer></script>
+        <script src = "js/global.js" defer></script><!--"defer" might be redunant because of the event listener in the script-->
+        <script src="https://unpkg.com/glsl-canvas-js/dist/umd/glsl-canvas.min.js"></script>        <!-- Loads the Inter font weights (Regular 400 and Bold 700) -->
         <link href="https://googleapis.com/css2?family=Inter:weight@400;700&display=swap" rel="stylesheet">
     </head>
     <header id = "navbar">
     </header>
-    <main>
-                <!--Left Widget-->
-        <div id = "left-widget" class = "draggable-widget">
-            <div class = "widget-header"><img src = "sprites/dragger.png" width = "20px" height = "20px">To Do - Drag me!</div>
-            <div class = "widget-content">
-                <ul>
-                    <li>Digital measuring tool that accomadates the user's screen with active feedback</li>
-                    <li>Program the backend for file conversion and a pixel sandbox</li>
-                    <li>Create a timing system and other basic utilities someone might use everday</li>
-                </ul>
+    <body>
+        <canvas id = "shader-background" class = "glsl-canvas" data-fragment-url = "shaders/background-shader.frag"></canvas>
+        <!--Cool Shader backgrounds-->
+        <main>
+            <!--Turns this canvas into a viewport of webgl baed on the file "background-shader.frag" using the glslCanvas library-->
+                    <!--Left Widget-->
+            <div id = "left-widget" class = "draggable-widget">
+                <div class = "widget-header"><img src = "sprites/dragger.png" width = "20px" height = "20px">To Do - Drag me!</div>
+                <div class = "widget-content">
+                    <ul>
+                        <li>Digital measuring tool that accomadates the user's screen with active feedback</li>
+                        <li>Program the backend for file conversion and a pixel sandbox</li>
+                        <li>Create a timing system and other basic utilities someone might use everday</li>
+                    </ul>
+                </div>
             </div>
-        </div>
 
-        <div id = "center-content"><!--This is where most of the content will be contained with occasoinal sidebars-->
-            <h3>Homepage</h3>
-            <div class = "description">            
-                This is the main page explaining about the author and the purpose of it including the utilities.
-                <br>| The main things that I want to do in this are going to be file conversion, making a pixel sandbox, making things you use everday like a measurmenet system, stopwatch, timer, and flash.
-                <br>
+            <div id = "center-content"><!--This is where most of the content will be contained with occasoinal sidebars-->
+                <h3>Homepage</h3>
+                <div class = "description">            
+                    This is the main page explaining about the author and the purpose of it including the utilities.
+                    <br>| The main things that I want to do in this are going to be file conversion, making a pixel sandbox, making things you use everday like a measurmenet system, stopwatch, timer, and flash.
+                    <br>
+                </div>
             </div>
-        </div>
-                        <!--Right Wdiget-->
-        <div id = "right-widget" class = "draggable-widget">
-            <div class = "widget-header"><img src = "sprites/dragger.png" width = "20px" height = "20px">Aim - Drag me!</div>
-            <div class = "widget-content">
-                <p>What I want to do with this website is make it include utilities of all kind, eventually reaching the point to where whenever you need something
-                    you can just come to this website. This is in order to sustain a hopefully regular userbase.
-                </p>
+                            <!--Right Wdiget-->
+            <div id = "right-widget" class = "draggable-widget">
+                <div class = "widget-header"><img src = "sprites/dragger.png" width = "20px" height = "20px">Aim - Drag me!</div>
+                <div class = "widget-content">
+                    <p>What I want to do with this website is make it include utilities of all kind, eventually reaching the point to where whenever you need something
+                        you can just come to this website. This is in order to sustain a hopefully regular userbase.
+                    </p>
+                </div>
             </div>
-        </div>
-    </main>
+        </main>
+    </body>
         <!--This will be for the widget movment-->
     <script>
         makeElementDraggable(document.getElementById("left-widget"));

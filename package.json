@@ -1,5 +1,9 @@
 {
   "devDependencies": {
     "@types/matter-js": "^0.20.2"
+  },
+  "dependencies": {
+    "glsl-canvas-js": "^0.2.9",
+    "glslCanvas": "^0.2.6"
   }
 }
