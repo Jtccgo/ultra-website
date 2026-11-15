@@ -24,6 +24,7 @@ document.addEventListener("DOMContentLoaded", () => {
         </nav> 
         `;
         } else if(currentPath.includes("index")){
+        console.log("SKIBIDI");
         navBar.innerHTML =
         `  
         <div id = "heading-title" >The Ultimate Website</div>
