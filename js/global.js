@@ -81,35 +81,35 @@ document.addEventListener("DOMContentLoaded", () => {
 
     //BACKGROUND BUTTONS TERRITORY
     const spookyBtn = document.getElementById('scary-bg-button');
-    const lightBtn = document.getElementById('light-bg-btn');
-    const darkBtn = document.getElementById('darg-bg-btn');//starry night
-    const staticBtn = document.getElementById('static-bg-btn');
-    const natureBtn = document.getElementById('nature-bg-btn');
+    const lightBtn = document.getElementById('light-bg-button');
+    const darkBtn = document.getElementById('dark-bg-button');//starry night
+    const staticBtn = document.getElementById('static-bg-button');
+    const natureBtn = document.getElementById('nature-bg-button');
 
-    if(spookyBtn) spookyBtn.addEventListener('click', setBackground("spooky"));
-    if(lightBtn) lightBtn.addEventListener('click', setBackground('light'));
-    if(lightBtn) lightBtn.addEventListener('click', setBackground('dark'));
-    if(lightBtn) lightBtn.addEventListener('click', setBackground('static'));
-    if(lightBtn) lightBtn.addEventListener('click', setBackground('nature'));
+    if(spookyBtn) spookyBtn.addEventListener('click', () => setBackground("spooky"));
+    if(lightBtn) lightBtn.addEventListener('click', () =>setBackground('light'));
+    if(darkBtn) darkBtn.addEventListener('click', () => setBackground('dark'));
+    if(staticBtn) staticBtn.addEventListener('click', () => setBackground('static'));
+    if(natureBtn) natureBtn.addEventListener('click', () => setBackground('nature'));
 
 }); 
 function setBackground(strVal) {
     const background = document.querySelector('.glsl-canvas');
     switch(strVal) {
         case 'spooky':
-            background.setAttribute('data-fragment-url', "/shaders/background-shader.frag");//might need to change it according to the documentation to mannually load the canvas
+            loadGSLSCanvas(background, "shaders/background-spooky.frag");
             break;
         case 'light':
-            background.setAttribute('data-fragment-url', "/shaders/background-shader.frag");
+            loadGSLSCanvas(background, "shaders/background-light.frag");
             break;
         case 'dark':
-            background.setAttribute('data-fragment-url', "/shaders/background-shader.frag");
+            loadGSLSCanvas(background, "shaders/background-dark.frag");
             break;
         case 'static':
-            loadGSLSCanvas(background, "shaders/background-shader.frag");
+            loadGSLSCanvas(background, "shaders/background-static.frag");
             break;
         case 'nature':
-            background.setAttribute('data-fragment-url', "/shaders/background-shader.frag");
+            loadGSLSCanvas(background, "shaders/background-nature.frag");
             break;
         default:
             break;
@@ -123,7 +123,7 @@ async function loadGSLSCanvas(canvas, path) {
             return response.text();//just the shader code
         }).then(code => {
             shaderCode = code;
-            console.log(shaderCode);
+            // console.log(shaderCode);for debugging
         }).catch(er => {
             console.error("ERROR IN SHADER: ", er);
             return;
@@ -133,6 +133,5 @@ async function loadGSLSCanvas(canvas, path) {
         fragmentString: shaderCode
     }
     const glslCanvas = new glsl.Canvas(canvas, options);
-
 }
 setBackground('static');
