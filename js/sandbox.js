@@ -52,7 +52,7 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         }
     }
-
+    
     canvas.addEventListener("mousedown", (e) => {
         isDrawing = true;
         draw(e);

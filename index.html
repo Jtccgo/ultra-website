@@ -19,8 +19,8 @@
     </head>
     <header id = "navbar">
     </header> 
-    <body>woah waiah wa
-        <canvas id = "shader-background" class = "glsl-canvas" data-fragment-url = "background-shader.frag"></canvas>
+    <body>
+        <canvas id = "shader-background" class = "glsl-canvas" data-fragment-url = "/shaders/background-shader.frag"></canvas>
         <!--Cool Shader backgrounds--> 
         <main>
             <!--Turns this canvas into a viewport of webgl baed on the file "background-shader.frag" using the glslCanvas library-->
@@ -54,6 +54,14 @@
                 </div>
             </div>
         </main>
+        <div class = "bg-buttons-container">
+            <button type = "button" id = "dark-bg-button"><img></button><!--Expanding Circles-->
+            <button type = "button" id = "static-bg-button"><img></button><!--Current one I have now-->
+            <button type = "button" id = "light-bg-button"><img></button> <!--A new pattern, maybe like random spirals?-->
+            <button type = "button" id = "nature-bg-button"><img></button><!--Nature themed background maybe with like leaves or stuff falling-->
+            <!--It could alsos have a seasonal option, where based on the time of year and location it changes colors-->
+            <button type = "button" id = "scary-bg-button"></button>
+        </div>
     </body>
         <!--This will be for the widget movment-->
     <script> 

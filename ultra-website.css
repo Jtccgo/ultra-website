@@ -407,3 +407,38 @@ button[type = "submit"]:active {
 body::-webkit-scrollbar {/*Removes the scrollbar*/
     display: none;
 }
+.bg-buttons-container {
+    display: flex;
+    gap:0.4vw;
+    position: fixed;
+    bottom: 35px;
+    left: 25px;
+    z-index: 1000;
+}
+.bg-buttons-container button {
+    border-radius: 6px;
+    width: 2vw;
+    height:2vw;
+    border:1.5px solid rgba(255, 255, 255, 0.25);
+    cursor: pointer;
+    justify-content: center;
+}
+.bg-buttons-container button:active {
+    transform: scale(0.90);
+    filter: brightness(0.8);
+}
+#dark-bg-button {
+    background-color: #000000;
+}
+#static-bg-button {
+    background-color:#333;/*nathan*/
+}
+#light-bg-button {
+    background-color: #7FFFD4;/*maybe like sun shining or something?*/
+}
+#nature-bg-button {
+    background-color:#065f46;/*tree*/
+}
+#scary-bg-button {
+    background-color:#000000;/*spooky face on top*/
+}
