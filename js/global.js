@@ -5,6 +5,7 @@ with some exceptions, so that I don't have to constantly change stuff like the n
 //Got to figure out a different way to set universal elements because
 //professional standards this is kind of unorthodox
 
+
 document.addEventListener("DOMContentLoaded", () => {
     const navBar = document.getElementById('navbar');
 
@@ -74,13 +75,16 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         });
     }
+    //LOADING SHADERS TERRITORY
+    const background = document.querySelector('.glsl-canvas');
+    //console.log(background);//simply to check whether or not it correctly grabs the webgl canvas
+
     //BACKGROUND BUTTONS TERRITORY
     const spookyBtn = document.getElementById('scary-bg-button');
     const lightBtn = document.getElementById('light-bg-btn');
     const darkBtn = document.getElementById('darg-bg-btn');//starry night
     const staticBtn = document.getElementById('static-bg-btn');
     const natureBtn = document.getElementById('nature-bg-btn');
-        const background = document.querySelector('.glsl-canvas');
 
     if(spookyBtn) spookyBtn.addEventListener('click', setBackground("spooky"));
     if(lightBtn) lightBtn.addEventListener('click', setBackground('light'));
@@ -102,7 +106,7 @@ function setBackground(strVal) {
             background.setAttribute('data-fragment-url', "/shaders/background-shader.frag");
             break;
         case 'static':
-            background.setAttribute('data-fragment-url', "/shaders/background-shader.frag");
+            loadGSLSCanvas(background, "shaders/background-shader.frag");
             break;
         case 'nature':
             background.setAttribute('data-fragment-url', "/shaders/background-shader.frag");
@@ -110,4 +114,25 @@ function setBackground(strVal) {
         default:
             break;
     }
+} 
+async function loadGSLSCanvas(canvas, path) {
+        let shaderCode = "";
+    if(canvas) {
+        await fetch(path).then(response => {
+            if(!response.ok) throw new Error(`ERROR GETTING SHADER: ${response.status}`);
+            return response.text();//just the shader code
+        }).then(code => {
+            shaderCode = code;
+            console.log(shaderCode);
+        }).catch(er => {
+            console.error("ERROR IN SHADER: ", er);
+            return;
+        });
+    } else return;
+    const options = {
+        fragmentString: shaderCode
+    }
+    const glslCanvas = new glsl.Canvas(canvas, options);
+
 }
+setBackground('static');
