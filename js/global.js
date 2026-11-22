@@ -5,7 +5,6 @@ with some exceptions, so that I don't have to constantly change stuff like the n
 //Got to figure out a different way to set universal elements because
 //professional standards this is kind of unorthodox
 
-
 document.addEventListener("DOMContentLoaded", () => {
     const navBar = document.getElementById('navbar');
     //HTML Injection Territory
@@ -52,32 +51,6 @@ document.addEventListener("DOMContentLoaded", () => {
             </nav>
             `;
         }
-    }
-    if(body) {
-        const authScript = `        <script type="module">//implementation of firebase for a secure databse
-            // Import the functions you need from the SDKs you need
-            import { initializeApp } from "https://www.gstatic.com/firebasejs/13.4.0/firebase-app.js";
-            import { getAnalytics } from "https://www.gstatic.com/firebasejs/13.4.0/firebase-analytics.js";
-            // TODO: Add SDKs for Firebase products that you want to use
-            // https://firebase.google.com/docs/web/setup#available-libraries
-
-            // Your web app's Firebase configuration
-            // For Firebase JS SDK v7.20.0 and later, measurementId is optional
-            const firebaseConfig = {
-                apiKey: "AIzaSyD2uaUmbo7nejLUwztX2fmRvMvkVCkIihc",
-                authDomain: "ultra-website-84a1b.firebaseapp.com",
-                projectId: "ultra-website-84a1b",
-                storageBucket: "ultra-website-84a1b.firebasestorage.app",
-                messagingSenderId: "818013483584",
-                appId: "1:818013483584:web:db130b8fb907c34e4d65a5",
-                measurementId: "G-KXJBQPPCM8"
-            };
-
-            // Initialize Firebase
-            const app = initializeApp(firebaseConfig);
-            const analytics = getAnalytics(app);
-        </script>`;
-        document.body.insertAdjacentHTML("beforeend", authScript);
     }
     //GAMEHUB TERRITORY
     const fullscreenBtn = document.getElementById('fullscreen-btn');
