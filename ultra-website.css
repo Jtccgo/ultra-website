@@ -448,7 +448,66 @@ body::-webkit-scrollbar {/*Removes the scrollbar*/
 }
 #auth-content {
     color:white;
+    max-width: 400px;
 }
-#custom-rule { 
+#auth-header, #newUser {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 8px;
+    margin-bottom: 16px;
+}
+.auth-form-label {
+    margin-bottom: 1px;
+    font-size: 12px;
+    color:#c0b3b3;
+}
+/* #auth-header img{
 
+} */ 
+#custom-rule {
+    margin: 20px 0;
+    display: flex;
+    align-items:center;
+    gap:16px;
+    color:#777;
+    font-size: 14px;
+}
+#custom-rule::before, #custom-rule::after {/*This is to make lines around the "or continue with" */
+    content: "";
+    flex: 1;
+    height: 1px;
+    background-color: #d4d4d4;
+}
+#auth-form *{
+    margin-bottom: 20px;
+
+}
+#auth-form  #github-login-button, #google-login-button {
+    min-height: 44px;
+    padding: 10px 14px;
+    border-radius: 8px;
+    
+}
+#auth-body button:hover {
+    cursor:pointer;
+} 
+#auth-continue {
+    background-color: var(--dark-bg);
+}
+#username-email {
+    all: unset;
+    background-color: #ffffff;
+    border-radius: 6px;
+    width: 100%;
+    height: 10%;
+    border: 2px solid #777;
+    margin-bottom: 10px;
+}
+#auth-form button:focus {
+    border: 2px solid #9DC1F1; 
+}
+#sign-up:visited {
+    color:#0000EE;
 }

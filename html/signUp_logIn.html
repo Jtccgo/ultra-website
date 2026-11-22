@@ -18,21 +18,24 @@
     <body id = "auth-body">
         <main>
             <div id = "auth-content"><!--This is where most of the content will be contained with occasoinal sidebars-->
-                <h2>A hub of utilities.</h2>
-                <h3>Log in to your Ultimate account</h3>
+                <div id = "auth-header">
+                    <img src = "../images/green-omega-symbol.png" width = 100px height = 100px>
+                    <h2>A hub of utilities.</h2>
+                    <h3>Log in to your Ultimate account</h3> 
+                </div>
                 <!--Sing with email and password-->
                 <form id = "auth-form"><!--I think I should use a new CSS font for this form at least for the placeholder textI think-->
-                    <label for = "username-email">Username/Email<br></label>
+                    <label for = "username-email" class = "auth-form-label" >Username/Email<br></label>
                     <input type = "text" id = "username-email" name = "usernameOrEmail" placeholder = "Enter username or email...">
 
-                    <label for = "password" class = "hidden">Password</label>
+                    <label for = "password" class = "hidden auth-form-label">Password</label>
                     <input type = "text" id = "password" name = "password" placeholder = "Enter password" class = "hidden">
                     
-                    <label for = "password" class = "hidden">Or use a verification code</label>
+                    <label for = "password" class = "hidden auth-form-label" >Or use a verification code</label>
                     <input type = "text" id = "vf-code" name = "code" placeholder = "Enter code" class = "hidden">
 
-                    <button type = "submit" ></button>
-                    <p id = "custom_rule"> or continue with </p>
+                    <button type = "submit" id = "auth-continue">Continue</button>
+                    <p id = "custom-rule">or continue with</p>
                     <!--Sign in with google and other formats-->
                     <button type = "button" id = "google-login-button"  >
                         <img src = "" alt = "">
@@ -42,9 +45,9 @@
                         <img src = "" alt = "">
                         Github
                     </button>
-                    <p>New User? <a>Sign up</a></p><!--I don't know if I should use anchor-->
+                    <p id = "newUser">New User? <a id = "sign-up" href = "">Sign up</a></p><!--I don't know if I should use anchor-->
                 </form> 
             </div>
         </main>
     </body>
-</html> 
+</html>  
