@@ -8,6 +8,7 @@
     --main-font: 'Inter', sans-Serif;
     --primary-bg: #d5d4b3;
     --dark-bg: #000ac2;
+    --whole-dark-bg: #181818;
     --primary-font-color: #7FFFD4;
     --dark-font-color: #c66384;
 }
@@ -441,4 +442,13 @@ body::-webkit-scrollbar {/*Removes the scrollbar*/
 }
 #scary-bg-button {
     background-color:#000000;/*spooky face on top*/
+}
+#auth-body {
+    background-color: var(--whole-dark-bg);
+}
+#auth-content {
+    color:white;
+}
+#custom-rule { 
+
 }
