@@ -445,6 +445,8 @@ body::-webkit-scrollbar {/*Removes the scrollbar*/
 }
 #auth-body {
     background-color: var(--whole-dark-bg);
+    transform: scale(1.15);
+    transform-origin: top center;
 }
 #auth-content {
     color:white;
@@ -480,7 +482,7 @@ body::-webkit-scrollbar {/*Removes the scrollbar*/
     height: 1px;
     background-color: #d4d4d4;
 }
-#auth-form *{
+#auth-form > *{
     margin-bottom: 20px;
 
 }
@@ -501,13 +503,31 @@ body::-webkit-scrollbar {/*Removes the scrollbar*/
     background-color: #ffffff;
     border-radius: 6px;
     width: 100%;
-    height: 10%;
+    height: 15%;
     border: 2px solid #777;
     margin-bottom: 10px;
+    color:#000000;
 }
 #auth-form button:focus {
     border: 2px solid #9DC1F1; 
 }
 #sign-up:visited {
-    color:#0000EE;
+    color:#69698f;
+}
+#alt-method {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 16px;
+}
+#alt-method button {
+    width: 40%;
+    height:60px;
+    box-shadow: none;
+    border: 2px solid var(--dark-bg);
+}
+#github-material-button, #gsi-material-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }

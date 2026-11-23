@@ -1,7 +1,7 @@
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassowrd, signOut, onAuthStateChanged} from "https://www.gstatic.com/firebasejs/13.4.0/firebase-auth.js";
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged} from "https://www.gstatic.com/firebasejs/13.4.0/firebase-auth.js";
 
         
-// Import the functions you need from the SDKs you need
+// Import the functions you need from the SDKs you new
 import { initializeApp } from "https://www.gstatic.com/firebasejs/13.4.0/firebase-app.js";
 import { getAnalytics } from "https://www.gstatic.com/firebasejs/13.4.0/firebase-analytics.js";
 // TODO: Add SDKs for Firebase products that you want to use
