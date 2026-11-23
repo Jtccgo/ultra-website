@@ -452,7 +452,7 @@ body::-webkit-scrollbar {/*Removes the scrollbar*/
     color:white;
     max-width: 400px;
 }
-#auth-header, #newUser {
+#auth-header, #switch {
     display: flex;
     flex-direction: column;
     align-items: center;
