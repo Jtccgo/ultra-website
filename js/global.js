@@ -42,7 +42,7 @@ document.addEventListener("DOMContentLoaded", () => {
             </nav> 
             `;
              defaultProfileImage = "../images/green-omega-symbol.png";
-             logPath = "../html/signUp_login.html";
+             logPath = "../html/signUp_logIn.html";
         } else if(currentPath.includes("index") || currentPath === "/"){
         
         navBar.innerHTML =`  
@@ -58,7 +58,7 @@ document.addEventListener("DOMContentLoaded", () => {
             </nav>
             `;
              defaultProfileImage = "images/green-omega-symbol.png";
-             logPath = "html/signUp_login.html";
+             logPath = "html/signUp_logIn.html";
         }else {
         navBar.innerHTML =
             `  
@@ -75,7 +75,7 @@ document.addEventListener("DOMContentLoaded", () => {
             </nav>
             `;
              defaultProfileImage = "../images/green-omega-symbol.png";
-             logPath = "../html/signUp_login.html";
+             logPath = "../html/signUp_logIn.html";
         }
     }
     //GAMEHUB TERRITORY
@@ -170,10 +170,10 @@ function authUI() {
         if(user) {//if user is sign in we can use the profile picture from whateer account they sign in with since google and maybe github share the pfp 
             authDisplay.innerHTML = "<img>";
             const display = authDisplay.querySelector("img");
-            display.height = 50;
-            display.width = 50;
+            display.height = 30;
+            display.width = 30;
             display.src = user.photoURL || defaultProfileImage;
-            display.alt = user.displayName || user.email || "Signed in";//should change this with css when hover so that its morea utomatic and bigger
+            display.title = user.displayName || user.email || "Signed in";//should change this with css when hover so that its morea utomatic and bigger
         } else {
             authDisplay.innerHTML = `<a href = "${logPath}">Sign Up or Log In</a>`
         }
