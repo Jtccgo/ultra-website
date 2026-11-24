@@ -4,6 +4,22 @@ with some exceptions, so that I don't have to constantly change stuff like the n
 */
 //Got to figure out a different way to set universal elements because
 //professional standards this is kind of unorthodox
+import { initializeApp } from "https://www.gstatic.com/firebasejs/13.4.0/firebase-app.js";
+import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/13.4.0/firebase-auth.js";
+
+// Reuse the same config if this file initializes its own app instance,
+// or import { auth } from "./auth.js" if both files are ES modules
+const firebaseConfig = {
+    apiKey: "AIzaSyD2uaUmbo7nejLUwztX2fmRvMvkVCkIihc",
+    authDomain: "ultra-website-84a1b.firebaseapp.com",
+    projectId: "ultra-website-84a1b",
+    storageBucket: "ultra-website-84a1b.firebasestorage.app",
+    messagingSenderId: "81801348384",
+    appId: "1:818013483584:web:db130b8fb907c34e4d65a5",
+    measurementId: "G-KXJBQPPCM8"
+};
+let logPath = "";
+let defaultProfileImage = ""
 
 document.addEventListener("DOMContentLoaded", () => {
     const navBar = document.getElementById('navbar');
@@ -22,8 +38,11 @@ document.addEventListener("DOMContentLoaded", () => {
                 <a href = "../html/gamehub.html">Gamehub<img src = "../sprites/controller.png"></a>
                 <a href = "../html/aboutme.html">About the Author<img src = "../sprites/Author-20261026-115625-frame0.png"></a>
                 <a href = "../html/basicUtil.html">Basic Utilities</a>
+                <span id = "auth-display"><a href = "../html/signUp_login.html">Sign up or Log In</a><span>
             </nav> 
             `;
+             defaultProfileImage = "../images/green-omega-symbol.png";
+             logPath = "../html/signUp_login.html";
         } else if(currentPath.includes("index") || currentPath === "/"){
         
         navBar.innerHTML =`  
@@ -35,8 +54,11 @@ document.addEventListener("DOMContentLoaded", () => {
                 <a href = "html/gamehub.html">Gamehub<img src = "sprites/controller.png"></a>
                 <a href = "html/aboutme.html">About the Author<img src = "sprites/Author-20261026-115625-frame0.png"></a>
                 <a href = "html/basicUtil.html">Basic Utilities</a>
+                <span id = "auth-display"><a href = "html/signUp_login.html">Sign up or Log In</a><span>
             </nav>
             `;
+             defaultProfileImage = "images/green-omega-symbol.png";
+             logPath = "html/signUp_login.html";
         }else {
         navBar.innerHTML =
             `  
@@ -48,8 +70,12 @@ document.addEventListener("DOMContentLoaded", () => {
                 <a href = "../html/gamehub.html">Gamehub<img src = "../sprites/controller.png"></a>
                 <a href = "../html/aboutme.html">About the Author<img src = "../sprites/Author-20261026-115625-frame0.png"></a>
                 <a href = "../html/basicUtil.html">Basic Utilities</a>
+                <span id = "auth-display"><a href = "../html/signUp_login.html">Sign up or Log In</a></span>
+
             </nav>
             `;
+             defaultProfileImage = "../images/green-omega-symbol.png";
+             logPath = "../html/signUp_login.html";
         }
     }
     //GAMEHUB TERRITORY
@@ -64,7 +90,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 });
                 fullscreenBtn.textContent = "⛶ Exit Fullscreen";//might want to change the special symbol to the oppsoite instead of it being the same if possible
             } else {
-                document.existFullscreen();
+                document.exitFullscreen();
                 fullscreenBtn.textContent = "⛶ Fullscreeen"
             }
         });
@@ -90,7 +116,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if(darkBtn) darkBtn.addEventListener('click', () => setBackground('dark'));
     if(staticBtn) staticBtn.addEventListener('click', () => setBackground('static'));
     if(natureBtn) natureBtn.addEventListener('click', () => setBackground('nature'));
-
+    authUI();
 }); 
 function setBackground(strVal) {
     const background = document.querySelector('.glsl-canvas');
@@ -132,5 +158,26 @@ async function loadGSLSCanvas(canvas, path) {
         fragmentString: shaderCode
     }
     const glslCanvas = new glsl.Canvas(canvas, options);
+    //sign up / log in logic
+}
+function authUI() {
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+
+    const authDisplay = document.getElementById('auth-display');
+
+    onAuthStateChanged(auth, (user) => {
+        if(user) {//if user is sign in we can use the profile picture from whateer account they sign in with since google and maybe github share the pfp 
+            authDisplay.innerHTML = "<img>";
+            const display = authDisplay.querySelector("img");
+            display.height = 50;
+            display.width = 50;
+            display.src = user.photoURL || defaultProfileImage;
+            display.alt = user.displayName || user.email || "Signed in";//should change this with css when hover so that its morea utomatic and bigger
+        } else {
+            authDisplay.innerHTML = `<a href = "${logPath}">Sign Up or Log In</a>`
+        }
+    });
+
 }
 setBackground('static');

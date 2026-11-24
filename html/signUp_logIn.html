@@ -11,6 +11,7 @@
                 <!-- Connects to Google Fonts -->
         <link rel="preconnect" href="https://googleapis.com">
         <link rel="preconnect" href="https://gstatic.com" crossorigin>
+        <script type="module" src="../js/auth.js"></script>
         <script src = "../js/global.js" defer></script>
         <!-- Loads the Inter font weights (Regular 400 and Bold 700) -->
         <link href="https://googleapis.com/css2?family=Inter:weight@400;700&display=swap" rel="stylesheet">
@@ -26,16 +27,26 @@
                 </div>
                 <!--Sing with email and password-->
                 <form id = "auth-form"><!--I think I should use a new CSS font for this form at least for the placeholder textI think-->
-                    <label for = "username-email" class = "auth-form-label" >Username/Email<br></label>
-                    <input type = "text" id = "username-email" name = "usernameOrEmail" placeholder = "Enter username or email...">
-
-                    <label for = "password" class = "hidden auth-form-label">Password</label>
-                    <input type = "password" id = "password" name = "password" placeholder = "Enter password" class = "hidden">
                     
-                    <label for = "password" class = "hidden auth-form-label" >Or use a verification code</label>
-                    <input type = "text" id = "vf-code" name = "code" placeholder = "Enter code" class = "hidden">
-                    <label for = "vf-code" class = "hidden auth-form-label">Remembered your password?</label>
+                    <div id = "username-email-container">
+                        <label for = "username-email" class = "auth-form-label" >Username/Email<br></label>
+                        <input type = "text" id = "username-email" name = "usernameOrEmail" placeholder = "Enter username or email...">
+                    </div>
+
+                    <div id = "password-container" class = "hidden">
+                        <label for = "password" class = "auth-form-label">Password<br></label>
+                        <input type = "password" id = "password" name = "password" placeholder = "Enter password">
+                        <label for = "password" class = "auth-form-label" >Forgot your password?</label><!--Have to change the logic for the alternative code bcause firebase doesn't send and email-->
+                    </div>
+
+                    <div id = "vf-code-container" class = "hidden">
+                        <input type = "text" id = "vf-code" name = "code" placeholder = "Enter code">
+                        <label for = "vf-code" class = "auth-form-label"><br>Remembered your password?</label>
+                    </div>
+                    
                     <button type = "submit" id = "auth-continue">Continue</button>
+                    <p id = "err-txt" style = "color:rgb(240, 142, 142)"></p>
+                    
                     <p id = "custom-rule">or continue with</p>
                     <!--Sign in with google and other formats-->
                     <!-- <div id = "alt-method">
@@ -48,7 +59,7 @@
                             Github
                         </button>
                     </div> --><!--Why did I try and design my own T_T-->
-                    <button class="gsi-material-button">
+                    <button class="gsi-material-button" type = "button">
                     <div class="gsi-material-button-state"></div>
                     <div class="gsi-material-button-content-wrapper">
                         <div class="gsi-material-button-icon">
