@@ -5,7 +5,7 @@ with some exceptions, so that I don't have to constantly change stuff like the n
 //Got to figure out a different way to set universal elements because
 //professional standards this is kind of unorthodox
 import { initializeApp } from "https://www.gstatic.com/firebasejs/13.4.0/firebase-app.js";
-import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/13.4.0/firebase-auth.js";
+import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/13.4.0/firebase-auth.js";
 
 // Reuse the same config if this file initializes its own app instance,
 // or import { auth } from "./auth.js" if both files are ES modules
@@ -20,7 +20,7 @@ const firebaseConfig = {
 };
 let logPath = "";
 let defaultProfileImage = ""
-
+let nestedLevel = 0;
 document.addEventListener("DOMContentLoaded", () => {
     const navBar = document.getElementById('navbar');
     //HTML Injection Territory
@@ -41,6 +41,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 <span id = "auth-display"><a href = "../html/signUp_login.html">Sign up or Log In</a><span>
             </nav> 
             `;
+            nestedLevel = 1;
              defaultProfileImage = "../images/green-omega-symbol.png";
              logPath = "../html/signUp_logIn.html";
         } else if(currentPath.includes("index") || currentPath === "/"){
@@ -57,6 +58,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 <span id = "auth-display"><a href = "html/signUp_login.html">Sign up or Log In</a><span>
             </nav>
             `;
+            nestedLevel = 0;
              defaultProfileImage = "images/green-omega-symbol.png";
              logPath = "html/signUp_logIn.html";
         }else {
@@ -74,6 +76,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
             </nav>
             `;
+            nestedLevel = 1;
              defaultProfileImage = "../images/green-omega-symbol.png";
              logPath = "../html/signUp_logIn.html";
         }
@@ -117,24 +120,28 @@ document.addEventListener("DOMContentLoaded", () => {
     if(staticBtn) staticBtn.addEventListener('click', () => setBackground('static'));
     if(natureBtn) natureBtn.addEventListener('click', () => setBackground('nature'));
     authUI();
+    setBackground('static');
 }); 
 function setBackground(strVal) {
     const background = document.querySelector('.glsl-canvas');
+    let extra = "";
+    //if(nestedLevel == 1) extra += "../"; 
+    if(window.location.pathname.includes("/html") || window.location.pathname.includes("/gamehub-sites")) extra = "../";
     switch(strVal) {
         case 'spooky':
-            loadGSLSCanvas(background, "shaders/background-spooky.frag");
+            loadGSLSCanvas(background, (extra+"shaders/background-spooky.frag"));
             break;
         case 'light':
-            loadGSLSCanvas(background, "shaders/background-light.frag");
+            loadGSLSCanvas(background, (extra + "shaders/background-light.frag"));
             break;
         case 'dark':
-            loadGSLSCanvas(background, "shaders/background-dark.frag");
+            loadGSLSCanvas(background, (extra + "shaders/background-dark.frag"));
             break;
         case 'static':
-            loadGSLSCanvas(background, "shaders/background-static.frag");
+            loadGSLSCanvas(background, (extra + "shaders/background-static.frag"));
             break;
         case 'nature':
-            loadGSLSCanvas(background, "shaders/background-nature.frag");
+            loadGSLSCanvas(background, (extra + "shaders/background-nature.frag"));
             break;
         default:
             break;
@@ -168,16 +175,35 @@ function authUI() {
 
     onAuthStateChanged(auth, (user) => {
         if(user) {//if user is sign in we can use the profile picture from whateer account they sign in with since google and maybe github share the pfp 
-            authDisplay.innerHTML = "<img>";
+            authDisplay.innerHTML = `
+            <img id = "profile-pic">
+            <div id = "profile-dropdown" class = "hidden"><button type = "button" id = "signout">Sign Out</button></div>
+            `;
+            const signOutButton = document.getElementById("signout");
             const display = authDisplay.querySelector("img");
+            const dropdown = document.getElementById("profile-dropdown");
             display.height = 30;
             display.width = 30;
             display.src = user.photoURL || defaultProfileImage;
             display.title = user.displayName || user.email || "Signed in";//should change this with css when hover so that its morea utomatic and bigger
+
+            display.addEventListener("click", (e) => {
+                e.stopPropagation();//so that way it doesn't make any unitended action
+                dropdown.classList.toggle("hidden");
+            });
+            document.addEventListener("click", () => {
+                dropdown.classList.add('hidden');
+            });
+            signOutButton.addEventListener("click", async () => {
+                try {
+                    await signOut(auth);
+                } catch(error) {
+                    console.log("SIGN OUT UNSUCCESSFUL: ", error)//why no message?
+                } 
+            });
         } else {
             authDisplay.innerHTML = `<a href = "${logPath}">Sign Up or Log In</a>`
         }
     });
 
 }
-setBackground('static');

@@ -531,3 +531,20 @@ body::-webkit-scrollbar {/*Removes the scrollbar*/
     justify-content: center;
     align-items: center;
 }
+#auth-display {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+}
+#profile-pic{
+    border-radius:50%;
+    cursor:pointer;
+    object-fit:cover;
+}
+#profile-dropdown {
+    position:absolute;
+    top:100%;
+    right:0;
+    margin-top: 6px;
+    z-index: 1000;
+}

@@ -12,8 +12,9 @@
         <link rel="preconnect" href="https://gstatic.com" crossorigin>
         <script src = "https://cdnjs.cloudflare.com/ajax/libs/matter-js/0.19.0/matter.min.js" defer></script>
         <!-- <script src="coi-serviceworker.js"></script>Need to inject this tag using javascript on every page so that the correct headers and stuff are sent -->
-        <script src = "../js/global.js" defer></script><!--"defer" might be redunant because of the event listener in the script-->
+        <script type = "module" src = "../js/global.js" defer></script><!--"defer" might be redunant because of the event listener in the script-->
         <script src = "../js/physics.js" defer></script>
+        <script type="module" src="../js/auth.js"></script>
         <!-- Loads the Inter font weights (Regular 400 and Bold 700) -->
         <link href="https://googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
         <script src="https://unpkg.com/@ffmpeg/ffmpeg@0.11.6/dist/ffmpeg.min.js"></script> <!--for the FFmpeg-->
